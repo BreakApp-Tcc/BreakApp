@@ -40,7 +40,7 @@ header{
     flex-direction: column;
 }
 
-.text-input{
+.input-box{
     border-style: none;
     background-color: white;
     width: 450px;

@@ -15,13 +15,6 @@ p{
     align-items: center;
 }
 
-.container-align{
-    width: 450px; 
-    display: flex;
-    flex-direction: column;
-    gap: 25px; 
-}
-
 /** header **/
 header{
     padding: 15px;
@@ -34,11 +27,17 @@ header{
     background-color: #9BCA9F;
     border-radius: 30px;
     width: 700px;
-    height: 400px;
+    height: 425px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 25px;
+}
+
+.container-together{
+    display: flex;
+    gap:45px;
 }
 
 .container-input{
@@ -49,12 +48,41 @@ header{
 .input-box{
     border-style: none;
     background-color: white;
-    width: 450px;
+    width: 200px;
     height: 30px;
     border-radius: 8px;
 }
 
-button{
+.sex-button-masc, .sex-button-fem{
+    border-style: none;
+    width: 225px;
+    height: 35px;
+    background-color: white;
+}
+
+.sex-button-masc{
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.sex-button-fem{
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.container-buttons{    
+    display: flex;
+    gap: 2px;
+}
+
+.birth-date{
+    border-style: none;
+    border-radius: 8px;
+    width: 450px;
+    height: 30px;
+}
+
+.button-next{
     border-style: none;
     width: 450px;
     height: 35px;
@@ -62,17 +90,4 @@ button{
     border-radius: 8px;
     background-color: black;
     color: white;
-}
-
-a{
-    text-decoration: none;
-    color: gray;
-    margin: 0;
-}
-
-.a-register {
-    text-align: left;
-    color: gray;
-    text-decoration: none;
-    margin-top: 5px;
 }
