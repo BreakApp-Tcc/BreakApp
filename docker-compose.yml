@@ -1,0 +1,31 @@
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nodelogin
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  app:
+    build: .
+    container_name: node_app
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: mysql://user:password@db:3306/nodelogin
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    command: ["node", "nodelogin.js"]
+
+volumes:
+  mysql_data:
