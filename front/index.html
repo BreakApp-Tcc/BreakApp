@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de IMC e TMB</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("form");
+
+            form.addEventListener("submit", async(event) => {
+                event.preventDefault();
+
+
+                const nome = document.getElementById("nome").value;
+                const idade = document.getElementById("idade").value;
+                const peso = document.getElementById("peso").value;
+                const altura = document.getElementById("altura").value;
+                const sexo = document.getElementById("sexo").value;
+
+
+                const userData = {
+                    nome,
+                    idade,
+                    peso,
+                    altura,
+                    sexo
+                };
+
+                try {
+                    const response = await fetch('http://localhost:3000/api/user', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(userData)
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+
+                        const resultadoDiv = document.getElementById("resultado");
+                        resultadoDiv.innerHTML = `
+                            <h2>Resultado:</h2>
+                            <p><strong>Nome:</strong> ${data.nome}</p>
+                            <p><strong>Idade:</strong> ${data.idade}</p>
+                            <p><strong>Peso:</strong> ${data.peso} kg</p>
+                            <p><strong>Altura:</strong> ${data.altura} m</p>
+                            <p><strong>Sexo:</strong> ${data.sexo}</p>
+                            <p><strong>IMC:</strong> ${data.imc}</p>
+                            <p><strong>TMB:</strong> ${data.tmb}</p>
+                        `;
+                    } else {
+                        alert("Erro ao calcular: " + data.erro);
+                    }
+                } catch (error) {
+                    alert("Erro de conexão: " + error.message);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>IMC & TMB</h1>
+    <form id="form">
+        <input id="nome" name="nome" placeholder="Nome" required><br>
+        <input id="idade" name="idade" type="number" placeholder="Idade" required><br>
+        <input id="peso" name="peso" type="number" step="0.1" placeholder="Peso (kg)" required><br>
+        <input id="altura" name="altura" type="number" step="0.01" placeholder="Altura (cm)" required><br>
+        <select id="sexo" name="sexo" required>
+            <option value="">Sexo</option>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+        </select><br>
+        <button type="submit">Calcular</button>
+    </form>
+
+    <div id="resultado"></div>
+</body>
+
+</html>
