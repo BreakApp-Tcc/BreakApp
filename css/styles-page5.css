@@ -1,0 +1,94 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: "Inter", sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/** Header **/
+header{
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+
+/** Form **/
+.container{
+    background-color: #9BCA9F;
+    border-radius: 30px;
+    padding: 40px 50px;
+    width: 100%;
+    max-width: 700px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.container > p{
+    font-size: 20px;
+    text-align: center;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#answer-text{
+    border-style: none;
+    background-color: white;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+button{
+    border-radius: 15px;
+    background-color: white;
+}
+
+/** Buttons at the end,  
+to go back or forward **/
+.back-next-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.back-next-buttons button{
+    height: 46px;
+    font-size: 16px;
+    border: none;
+    padding: 0 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#back-button{
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+#next-button{
+    padding-left: 70px;
+    padding-right: 70px;
+    background-color: black;
+    color: white;
+}
