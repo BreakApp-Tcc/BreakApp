@@ -104,27 +104,23 @@ header{
 .sex-button-masc{
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    position: relative;
-    transition: right 0.6s ease;
-    right: 0;
+    transform: 0.8s ease;
 }
 .sex-button-masc:hover{
-    right: 10px;
+    transform: scale(1.05);
 }
 .sex-button-fem{
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    position: relative;
-    transition: left 0.6s ease;
-    left: 0;
+    transform: 0.8s ease;
 }
 .sex-button-fem:hover{
-    left: 10px;
+    transform: scale(1.05);
 }
 
 .container-buttons{    
     display: flex;
-    gap: 2px;
+    gap: 10px;
     width: 100%;
     max-width: 450px;
     align-self: center;
