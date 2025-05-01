@@ -3,6 +3,16 @@
     margin: 0;
     padding: 0;
 }
+/** color and transitions variables **/
+:root {
+    --color-container:#9bca9f;
+    --color-black:#000000;
+    --color-white: #ffffff;
+    --color-button-transition:rgb(0, 0, 0);
+    --color-button:#9bca9f;
+    --color-link: #808080;
+    
+}
 
 body{
     font-family: "Inter", sans-serif;
@@ -43,7 +53,7 @@ header{
 }
 
 .container{
-    background-color: #9BCA9F;
+    background-color: var(--color-container);
     border-radius: 30px;
     width: 100%;
     max-width: 700px;
@@ -62,31 +72,45 @@ header{
 
 .input-box{
     border-style: none;
-    background-color: white;
+    background-color: var(--color-white);
     padding: 12px;
     border-radius: 10px;
     font-size: 16px;
 }
 
 button{
-    border: none;
+    border-style: solid;
     height: 46px;
     font-size: 16px;
     border-radius: 10px;
-    background-color: black;
-    color: white;
+    background-color: var(--color-button);
+    color: var(--collor-black);
+    font-weight: bold;
+    border-color: var(--color-black);
     cursor: pointer;
+    position: relative;
+    transition: left 0.6s ease;
+    left: 0;
+}
+button:hover{
+    background-color: var(--color-button-transition);
+    color: var(--color-white);
+    border-style: double;
+    left: 10px;
 }
 
 a{
     text-decoration: none;
-    color: gray;
     margin: 0;
+    color: var(--color-link);
 }
-
+a:hover{
+    color: var(--color-black);
+    transition-duration: 0.5s;
+}
 .a-register {
     text-align: center;
-    color: gray;
+    color: var(--color-link);
     text-decoration: none;
     font-size: 14px;
     margin-top: 5px;

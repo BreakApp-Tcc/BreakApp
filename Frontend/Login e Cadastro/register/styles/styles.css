@@ -3,6 +3,15 @@
     margin: 0;
     padding: 0;
 }
+/** color and transitions variables **/
+:root {
+    --color-container:#9bca9f;
+    --color-black:#000000;
+    --color-white: #ffffff;
+    --color-button-transition:rgb(0, 0, 0);
+    --color-button:#9bca9f;
+    --color-link: #808080;
+}
 
 body{
     font-family: "Inter", sans-serif;
@@ -29,7 +38,7 @@ header{
 }
 
 .container{
-    background-color: #9BCA9F;
+    background-color: var(--color-container);
     border-radius: 30px;
     width: 100%;
     max-width: 700px;
@@ -58,7 +67,7 @@ header{
 
 .input-box{
     border: none;
-    background-color: white;
+    background-color: var(--color-white);
     padding: 12px;
     border-radius: 10px;
     font-size: 16px;
@@ -73,26 +82,43 @@ a{
     width: 100%;
     max-width: 450px;
     align-self: center;
-    color: gray;
+    color: var(--color-link);
+}
+a:hover{
+    color: var(--color-black);
+    transition-duration: 0.5s;
+}
+.a-login{
+    text-align: center;
+    color: var(--color-link);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 5px;
+    cursor: pointer;
+    align-self: center;
 }
 
 button{
-    border: none;
+    border-style: solid;
     margin-top: 10px;
     width: 100%;
     max-width: 450px;
     height: 46px;
     border-radius: 10px;
-    background-color: black;
-    color: white;
+    background-color: var(--color-button);
+    color: var(--color-black);
     align-self: center;
     cursor: pointer;
+    transition: left 0.6s ease;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    left: 0;
+    position: relative;
 }
-
-.a-login {
-    text-align: center;
-    color: gray;
-    text-decoration: none;
-    font-size: 14px;
-    margin-top: 5px;
+button:hover{
+    background-color: var(--color-button-transition);
+    color: var(--color-white);
+    border-style: solid;
+    left: 10px;
 }
