@@ -1,0 +1,13 @@
+{
+    "name": "back-end",
+    "version": "1.0.0",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "express": "^4.17.1",
+        "express-session": "^1.18.1",
+        "mysql2": "^2.3.3"
+    },
+    "scripts": {
+        "start": "node server.js"
+    }
+}
