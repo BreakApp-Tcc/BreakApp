@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>BreakApp</title>
+</head>
+
+<body>
+    <header>
+        <button class="sidebar">
+            <image src="#" />
+        </button>
+        <div id="left-header">
+            <p>Nome</p>
+            <button class="profile">
+                <image src="#" />
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-info">
+            <div class="progresscircle-container">
+                <div class="progressCircle">
+                    <div class="progressPercentage">
+                        <span class="value">0%</span>
+                    </div>
+                </div>
+                <div class="insertProgress"><input type="number" oninput="changeCircleProgress()" /></div>
+            </div>
+            <div class="chart-container">
+                <canvas id="doughnut" width="300" height="300"></canvas>
+            </div>
+        </div>
+
+        <div class="searchbar">
+            <input type="text" id="searchbar" placeholder="Adicionar novo registro">
+        </div>
+
+        <div class="water-section">
+            <div class="water-section-info">
+                <p>Água</p>
+                <div class="waterProgressbar">
+                    <div></div>
+                </div>
+                <div class="progressbarInput">
+                    <input type="number" oninput="changeWaterProgress()" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/circular-progressbar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+    <script src="../scripts/chart.js"></script>
+    <script src="../scripts/water-progressbar.js"></script>
+</body>
+
+</html>
