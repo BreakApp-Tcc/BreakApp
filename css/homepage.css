@@ -4,6 +4,16 @@
     box-sizing: border-box;
 }
 
+/** color and transitions variables **/
+:root {
+    --color-container: #D9D9D9;
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-button-transition: rgb(0, 0, 0);
+    --color-button: #9bca9f;
+    --color-link: #808080;
+}
+
 body{
     font-family: "Inter", sans-serif;
     height: 100vh;
@@ -17,26 +27,16 @@ p{
 .container{
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
     gap: 70px;
-}
-
-/** Header **/
-header{
-    padding: 15px;
-    padding-bottom: 50px;
-    display: flex;
-    justify-content: space-between;
-}
-
-#right-header{
-    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 /** First section **/
 .main-info{
-    background-color: #D9D9D9;
+    background-color: var(--color-white);
     width: 1200px;
     height: 500px;
     border-radius: 40px;
@@ -56,7 +56,7 @@ header{
     justify-content: center;
     align-items: center;
     position: relative;
-    transition: background 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .progressCircle::before {
@@ -64,7 +64,7 @@ header{
     position: absolute;
     width: 190px;
     height: 190px;
-    background: #D9D9D9;
+    background: var(--color-white);
     border-radius: 50%;
     transition: all 300ms;
 }
@@ -95,7 +95,7 @@ header{
 
 /** Register searchbar **/
 #searchbar{
-    background-color: #D9D9D9;
+    background-color: var(--color-white);
     width: 1200px;
     height: 75px;
     padding: 10px;
@@ -116,7 +116,7 @@ header{
 
 /** Water bar **/
 .water-section{
-    background-color: #D9D9D9;
+    background-color: var(--color-white);
     width: 1200px;
     height: 180px;
     border-style: none;
@@ -141,7 +141,7 @@ header{
     max-width: 600px;
     height: 10%;
     border-radius: 50px;
-    background-color: white;
+    background-color: var(--color-container);
 }
 
 .waterProgressbar div{

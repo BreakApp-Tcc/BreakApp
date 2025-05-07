@@ -9,55 +9,112 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/homepage.css">
     <title>BreakApp</title>
 </head>
 
 <body>
-    <header>
-        <button class="sidebar">
-            <image src="#" />
-        </button>
-        <div id="left-header">
-            <p>Nome</p>
-            <button class="profile">
-                <image src="#" />
-            </button>
-        </div>
-    </header>
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div id="sidebar-content">
+            <div id="openbar">
+                <button id="openbar-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+            <ul class="sidebar-items">
+                <li class="side-item">
+                    <a href="#">
+                        <i class="fa-solid fa-utensils"></i>
+                        <span class="item-description">
+                            Dieta
+                        </span>
+                    </a>
+                </li>
 
-    <div class="container">
-        <div class="main-info">
-            <div class="progresscircle-container">
-                <div class="progressCircle">
-                    <div class="progressPercentage">
-                        <span class="value">0%</span>
+                <li class="side-item">
+                    <a href="#">
+                        <i class="fa-solid fa-id-card"></i>
+                        <span class="item-description">
+                            Alimentos
+                        </span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a href="#">
+                        <i class="fa-solid fa-comment"></i>
+                        <span class="item-description">
+                            NutrIA
+                        </span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a href="#">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                        <span class="item-description">
+                            Planos
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="sidebar-content-config">
+            <ul class="sidebar-items">
+                <li id="side-item-config">
+                    <a href="#">
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="item-description">
+                            Configurações
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <h1>BreakApp</h1>
+    </main>
+
+    <!-- Homepage -->
+        <div class="container">
+            <div class="main-info">
+                <div class="progresscircle-container">
+                    <div class="progressCircle">
+                        <div class="progressPercentage">
+                            <span class="value">0%</span>
+                        </div>
+                    </div>
+                    <div class="insertProgress"><input type="number" oninput="changeCircleProgress()" /></div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="doughnut" width="300" height="300"></canvas>
+                </div>
+            </div>
+
+            <div class="searchbar">
+                <input type="text" id="searchbar" placeholder="Adicionar novo registro">
+            </div>
+
+            <div class="water-section">
+                <div class="water-section-info">
+                    <p>Água</p>
+                    <div class="waterProgressbar">
+                        <div></div>
+                    </div>
+                    <div class="progressbarInput">
+                        <input type="number" oninput="changeWaterProgress()" />
                     </div>
                 </div>
-                <div class="insertProgress"><input type="number" oninput="changeCircleProgress()" /></div>
-            </div>
-            <div class="chart-container">
-                <canvas id="doughnut" width="300" height="300"></canvas>
             </div>
         </div>
-
-        <div class="searchbar">
-            <input type="text" id="searchbar" placeholder="Adicionar novo registro">
-        </div>
-
-        <div class="water-section">
-            <div class="water-section-info">
-                <p>Água</p>
-                <div class="waterProgressbar">
-                    <div></div>
-                </div>
-                <div class="progressbarInput">
-                    <input type="number" oninput="changeWaterProgress()" />
-                </div>
-            </div>
-        </div>
-    </div>
-
+        
+    <!-- Scripts -->
+    <script src="../scripts/sidebar.js"></script>
     <script src="../scripts/circular-progressbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
     <script src="../scripts/chart.js"></script>
