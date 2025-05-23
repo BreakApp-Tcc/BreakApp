@@ -1,0 +1,159 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/** color and transitions variables **/
+:root {
+    --color-container:#9bca9f;
+    --color-black:#000000;
+    --color-white: #ffffff;
+    --color-button-transition:rgb(0, 0, 0);
+    --color-button:#9bca9f;
+    --color-link: #808080;
+}
+body{
+    font-family: "Inter", sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/** header **/
+header{
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+
+/** login section**/
+.wrapper{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container{
+    background-color: var(--color-container);
+    border-radius: 30px;
+    width: 100%;
+    max-width: 700px;
+    min-height: 440px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+    overflow: hidden;
+}
+
+.container-together{
+    display: flex;
+    gap: 45px;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.container-input{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 450px;
+    align-self: center;
+}
+
+.container-together .container-input{
+    width: auto;
+    max-width: none;
+    align-items: flex-start;
+}
+
+.container-together .input-box{
+    width: 200px;
+}
+
+.container p{
+    font-size: 16px;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.input-box, .birth-date{
+    border: none;
+    background-color: var(--color-white);
+    width: 100%;
+    max-width: 450px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.sex-button-masc, 
+.sex-button-fem{
+    flex: 1;
+    font-size: 16px;
+    padding: 12px 0;
+    border: none;
+    background-color: var(--color-white);
+    cursor: pointer;
+}
+.sex-button-masc{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transform: 0.8s ease;
+}
+.sex-button-masc:hover{
+    transform: scale(1.05);
+}
+.sex-button-fem{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transform: 0.8s ease;
+}
+.sex-button-fem:hover{
+    transform: scale(1.05);
+}
+
+.container-buttons{    
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 450px;
+    align-self: center;
+}
+
+.birth-date{
+    border-style: none;
+    border-radius: 8px;
+    width: 450px;
+    height: 30px;
+}
+
+.button-next{
+    border-style: solid;
+    width: 100%;
+    max-width: 450px;
+    height: 46px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--color-button);
+    color: var(--color-black);
+    align-self: center;
+    cursor: pointer;
+    transition: left 0.6s ease;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    left: 0;
+}
+.button-next:hover{
+    background-color: var(--color-button-transition);
+    color: var(--color-white);
+    border-style: solid;
+    left: 10px;
+}

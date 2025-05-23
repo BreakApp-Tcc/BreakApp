@@ -1,0 +1,117 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/** color and transitions variables **/
+:root {
+    --color-container:#9bca9f;
+    --color-black:#000000;
+    --color-white: #ffffff;
+    --color-button-transition:rgb(0, 0, 0);
+    --color-button:#9bca9f;
+    --color-link: #808080;
+    
+}
+
+body{
+    font-family: "Inter", sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+p{
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+/** header **/
+header{
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+
+/** login section**/
+.wrapper{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container-align{
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto; 
+    display: flex;
+    flex-direction: column;
+    gap: 25px; 
+}
+
+.container{
+    background-color: var(--color-container);
+    border-radius: 30px;
+    width: 100%;
+    max-width: 700px;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.container-input{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-box{
+    border-style: none;
+    background-color: var(--color-white);
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+button{
+    border-style: solid;
+    height: 46px;
+    font-size: 16px;
+    border-radius: 10px;
+    background-color: var(--color-button);
+    color: var(--collor-black);
+    font-weight: bold;
+    border-color: var(--color-black);
+    cursor: pointer;
+    position: relative;
+    transition: left 0.6s ease;
+    left: 0;
+}
+button:hover{
+    background-color: var(--color-button-transition);
+    color: var(--color-white);
+    border-style: double;
+    left: 10px;
+}
+
+a{
+    text-decoration: none;
+    margin: 0;
+    color: var(--color-link);
+}
+a:hover{
+    color: var(--color-black);
+    transition-duration: 0.5s;
+}
+.a-register {
+    text-align: center;
+    color: var(--color-link);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 5px;
+}

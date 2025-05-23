@@ -1,0 +1,120 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    padding: 20px;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.refeicoes {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.refeicoes button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: #03afff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.refeicoes button:hover {
+    background-color: #13b6cc;
+}
+
+#refeicao-atual {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.search-wrapper {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+}
+
+.search-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.search-bar input[type="text"],
+.search-bar input[type="number"] {
+    padding: 10px 14px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 24px;
+    outline: none;
+    width: 250px;
+    transition: border-color 0.2s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar input:focus {
+    border-color: #999;
+}
+
+.sugestoes-lista {
+    margin-top: 8px;
+    background: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sugestoes-lista li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.sugestoes-lista li:hover {
+    background-color: #f1f1f1;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.selecionados {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.selecionados .item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.selecionados .item:last-child {
+    border-bottom: none;
+}
