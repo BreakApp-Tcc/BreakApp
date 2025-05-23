@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styleslogin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Entrar</title>
+</head>
+
+<body>
+    <header>
+        <img src="../static/images/breakapppreto.png" alt="breakapp preto" height="30px" width="auto">
+    </header>
+    <form id="formlogin" action="/api/user/login" method="POST">
+        <div class="wrapper">
+            <div class="container">
+                <div class="container-align">
+                    <div class="container-input">
+                        <div class="container-input">
+                            <label for="identificador">Usuário ou Email:</label>
+                            <input type="text" class="input-box" name="identificador" id="identificador" required>
+                        </div>
+                    </div>
+                    <div class="container-input">
+                        <p>Senha:</p>
+                        <input type="password" class="input-box" id="senha" name="senha" required>
+                    </div>
+                    <button type="submit">Entrar</button>
+                    <a href="/cadastrar" class="a-register">Não tenho uma conta</a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        document.getElementById('formlogin').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const identificador = document.getElementById('identificador').value;
+            const senha = document.getElementById('senha').value;
+
+            try {
+                const response = await fetch('/api/user/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        identificador,
+                        senha
+                    })
+                });
+
+                if (response.ok) {
+                    window.location.href = '/register-page2';
+                } else {
+                    const errorText = await response.text();
+                    alert(errorText);
+                }
+            } catch (error) {
+                console.error('Erro no login:', error);
+                alert("Erro de conexão com o servidor.");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
