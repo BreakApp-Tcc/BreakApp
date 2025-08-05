@@ -1,34 +1,42 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
+
 /** color and transitions variables **/
+
 :root {
-    --color-container:#9bca9f;
-    --color-black:#000000;
+    --color-container: #9bca9f;
+    --color-black: #000000;
     --color-white: #ffffff;
-    --color-button-transition:rgb(0, 0, 0);
-    --color-button:#9bca9f;
+    --color-button-transition: rgb(0, 0, 0);
+    --color-button: #9bca9f;
     --color-link: #808080;
 }
-body{
+
+body {
     font-family: "Inter", sans-serif;
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
+
 /** header **/
-header{
+
+header {
     padding: 20px 40px;
     display: flex;
     align-items: center;
     height: 80px;
 }
 
-/** login section**/
-.wrapper{
+
+/** login section **/
+
+.wrapper {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -36,7 +44,7 @@ header{
     padding: 20px;
 }
 
-.container{
+.container {
     background-color: var(--color-container);
     border-radius: 30px;
     width: 100%;
@@ -49,40 +57,48 @@ header{
     overflow: hidden;
 }
 
-.container-together{
+.container-together {
     display: flex;
     gap: 45px;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    /* Alinha verticalmente ao centro */
     width: 100%;
 }
 
-.container-input{
+.container-input {
     display: flex;
     flex-direction: column;
     gap: 8px;
     width: 100%;
     max-width: 450px;
     align-self: center;
+    align-items: center;
+    /* Centraliza texto e inputs */
+    text-align: center;
 }
 
-.container-together .container-input{
+.container-together .container-input {
     width: auto;
     max-width: none;
-    align-items: flex-start;
+    align-items: center;
+    /* Centraliza também no container-together */
+    text-align: center;
 }
 
-.container-together .input-box{
+.container-together .input-box {
     width: 200px;
 }
 
-.container p{
+.container p {
     font-size: 16px;
-    text-align: left;
+    /* Centraliza o texto dos <p> */
+    text-align: center;
     word-wrap: break-word;
 }
 
-.input-box, .birth-date{
+.input-box,
+.birth-date {
     border: none;
     background-color: var(--color-white);
     width: 100%;
@@ -90,50 +106,58 @@ header{
     padding: 12px;
     font-size: 16px;
     border-radius: 10px;
+    text-align: center;
+    /* centraliza o texto dentro do input */
 }
 
-.sex-button-masc, 
-.sex-button-fem{
+.sex-button-masc,
+.sex-button-fem {
     flex: 1;
     font-size: 16px;
     padding: 12px 0;
     border: none;
     background-color: var(--color-white);
     cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    user-select: none;
 }
-.sex-button-masc{
+
+.sex-button-masc {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    transform: 0.8s ease;
 }
-.sex-button-masc:hover{
-    transform: scale(1.05);
-}
-.sex-button-fem{
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    transform: 0.8s ease;
-}
-.sex-button-fem:hover{
+
+.sex-button-masc:hover,
+.sex-button-fem:hover {
     transform: scale(1.05);
 }
 
-.container-buttons{    
+.sex-button-fem {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.container-buttons {
     display: flex;
     gap: 10px;
     width: 100%;
     max-width: 450px;
+    justify-content: center;
+    /* centraliza os botões */
+    align-items: center;
+    /* alinha verticalmente os botões */
     align-self: center;
 }
 
-.birth-date{
+.birth-date {
     border-style: none;
     border-radius: 8px;
     width: 450px;
     height: 30px;
+    text-align: center;
 }
 
-.button-next{
+.button-next {
     border-style: solid;
     width: 100%;
     max-width: 450px;
@@ -146,14 +170,42 @@ header{
     cursor: pointer;
     transition: left 0.6s ease;
     font-weight: bold;
-    cursor: pointer;
     font-size: 16px;
     position: relative;
     left: 0;
 }
-.button-next:hover{
+
+.button-next:hover {
     background-color: var(--color-button-transition);
     color: var(--color-white);
     border-style: solid;
     left: 10px;
+}
+
+
+/** Estilo de botão selecionado com animação suave **/
+
+.selected {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+    text-decoration: none;
+    margin: 0;
+    color: var(--color-link);
+}
+
+a:hover {
+    color: var(--color-black);
+    transition-duration: 0.5s;
+}
+
+.a-register {
+    text-align: center;
+    color: var(--color-link);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 5px;
 }

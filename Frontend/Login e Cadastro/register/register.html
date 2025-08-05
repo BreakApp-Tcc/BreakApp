@@ -2,13 +2,12 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<<<<<<< HEAD
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/stylesregister.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <title>Cadastro</title>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -25,107 +24,75 @@
                     return;
                 }
 
-                const formData = new FormData(form);
-                const dados = Object.fromEntries(formData);
+                const dados = {
+                    nome_usuario: document.getElementById("nome_usuario").value,
+                    email: document.getElementById("email").value,
+                    senha: document.getElementById("senha").value
+                };
 
-                const res = await fetch("/api/user/cadastrar", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(dados),
-                });
-
-                let json;
                 try {
-                    json = await res.json();
-                } catch (err) {
-                    const text = await res.text();
-                    alert("Erro ao cadastrar:\n" + text);
-                    return;
-                }
+                    const res = await fetch("/api/user/cadastrar", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(dados),
+                    });
 
-                if (res.ok) {
-                    alert(json.mensagem);
-                    localStorage.setItem("nome_usuario", json.nome_usuario);
-                    window.location.href = "/login";
-                } else {
-                    alert(json.mensagem || "Erro ao cadastrar.");
+                    if (res.ok) {
+                        const json = await res.json();
+                        alert(json.mensagem);
+                        localStorage.setItem("nome_usuario", dados.nome_usuario);
+                        window.location.href = "/register-page2";
+                    } else {
+                        let json;
+                        try {
+                            json = await res.json();
+                            alert(json.mensagem || "Erro ao cadastrar.");
+                        } catch {
+                            const text = await res.text();
+                            alert(text || "Erro ao cadastrar.");
+                        }
+                    }
+
+                } catch (error) {
+                    alert("Erro na requisição: " + error.message);
                 }
             });
+
         });
     </script>
-=======
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <title>Cadastro</title>
->>>>>>> 1a7434b1d36fadb183ed7aa420d21b6cf2ec4b6e
+
 </head>
 
 <body>
     <header>
-        <img src="../images/breakapp preto.png" alt="breakapp preto" height="30px" width="auto">
+        <img src="../images/breakapp preto.png" alt="breakapp preto" height="30px" />
     </header>
-<<<<<<< HEAD
+
     <form id="formcadastro" action="/api/user/cadastrar" method="POST">
         <div class="wrapper">
             <div class="container">
                 <div class="container-input">
-                    <p>Nome:</p>
-                    <input type="text" class="input-box">
+                    <p>Usuário:</p>
+                    <input type="text" class="input-box" id="nome_usuario" name="nome_usuario" required />
                 </div>
                 <div class="container-input">
                     <p>Email:</p>
-                    <input type="text" class="input-box">
+                    <input type="text" class="input-box" id="email" name="email" required />
                 </div>
                 <div class="container-input">
                     <p>Senha:</p>
-                    <input type="text" class="input-box">
+                    <input type="password" class="input-box" id="senha" name="senha" required />
                 </div>
                 <div class="container-input">
                     <p>Digite a senha novamente:</p>
-                    <input type="text" class="input-box">
+                    <input type="password" id="senhaConfirma" name="senhaConfirma" class="input-box" required />
                 </div>
-                <a href="../register/register-page2.html">
-                    <button type="button">Próximo</button>
-                </a>
-                <div class="a-login">
-                    <a href="../login/login.html" class="a-login">Já tenho uma conta</a>
-                </div>
+                <button type="submit">Cadastrar</button>
             </div>
         </div>
     </form>
-=======
-    
-    <div class="wrapper">
-        <div class="container">
-            <div class="container-input">
-                <p>Nome:</p>
-                <input type="text" class="input-box">
-            </div>
-            <div class="container-input">
-                <p>Email:</p>
-                <input type="text" class="input-box">
-            </div>
-            <div class="container-input">
-                <p>Senha:</p>
-                <input type="text" class="input-box">
-            </div>
-            <div class="container-input">
-                <p>Digite a senha novamente:</p>
-                <input type="text" class="input-box">
-            </div>
-            <a href="../register/register-page2.html">
-                <button type="button">Próximo</button>
-            </a>
-            <div class="a-login">
-                <a href="../login/login.html" class="a-login">Já tenho uma conta</a>
-            </div>
-        </div>
-       
-    </div>
->>>>>>> 1a7434b1d36fadb183ed7aa420d21b6cf2ec4b6e
 </body>
 
 </html>

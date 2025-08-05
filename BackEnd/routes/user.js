@@ -61,15 +61,7 @@ router.post('/cadastrar', (req, res) => {
                                 if (checkErr || checkResults.length === 0) {
                                     return res.status(500).send('Erro ao confirmar cadastro');
                                 }
-
-                                return res.status(201).json({
-                                    mensagem: 'Cadastro realizado com sucesso!',
-                                    usuario: {
-                                        id: checkResults[0].id,
-                                        nome_usuario: checkResults[0].nome_usuario,
-                                        email: checkResults[0].email
-                                    }
-                                });
+                                res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso!' });
                             }
                         );
                     }
@@ -114,6 +106,7 @@ router.post('/login', (req, res) => {
                         req.session.loggedin = true;
                         req.session.usuario = usuario.nome_usuario;
                         console.log('Login bem-sucedido:', usuario.nome_usuario);
+                        return res.status(200).json({ mensagem: 'Login realizado com sucesso!' });
                     } else {
                         return res.status(400).send('Senha incorreta');
                     }
@@ -130,16 +123,11 @@ router.post('/login', (req, res) => {
 // Rota calcular imc e tmb
 router.post('/calcular', (req, res) => {
     const { idade, peso, altura, sexo } = req.body;
-
-    if (!req.session.usuario) {
-        return res.status(401).json({ erro: "Usuário não autenticado." });
-    }
-
     if (!idade || !peso || !altura || !sexo) {
         return res.status(400).json({ erro: "Todos os campos são obrigatórios." });
     }
 
-    const imc = peso / (altura * altura);
+    const imc = peso / ((altura / 100) ** 2);
     const tmb = 10 * peso + 6.25 * altura * 100 - 5 * idade + (sexo === "masculino" ? 5 : -161);
 
     const sql = `

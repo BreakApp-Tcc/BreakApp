@@ -65,7 +65,8 @@ CREATE TABLE alimentos (
     Folato_DFE_mcg DECIMAL(10, 2),
     Vitami_na_D_mcg DECIMAL(10, 2),
     Vitami_na_E_mg DECIMAL(10, 2),
-    Vitami_na_C_mg DECIMAL(10, 2)
+    Vitami_na_C_mg DECIMAL(10, 2),
+	criado_por_usuario BOOLEAN DEFAULT FALSE
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
@@ -73,17 +74,22 @@ CREATE TABLE alimentos (
 -- Tabela de refeições
 CREATE TABLE refeicoes (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL
+    nome VARCHAR(255) NOT NULL,
+    data_hora DATETIME NOT NULL
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
 
--- Tabela itens da refeição (relaciona refeicoes e alimentos)
-CREATE TABLE refeicao_itens (
+CREATE TABLE refeicao_alimentos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     refeicao_id INT NOT NULL,
-    alimento_id INT NOT NULL,
-    quantidade DECIMAL(6,2) NOT NULL
+    descricao VARCHAR(255) NOT NULL,
+    quantidade DECIMAL(6,2) NOT NULL,
+    energia DECIMAL(6,2),
+    proteina DECIMAL(6,2),
+    lipidio DECIMAL(6,2),
+    carboidrato DECIMAL(6,2),
+    FOREIGN KEY (refeicao_id) REFERENCES refeicoes(id) ON DELETE CASCADE
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;

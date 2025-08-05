@@ -2,18 +2,18 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles-page2.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../styles/styles-page2.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <title>Cadastro</title>
 </head>
 
 <body>
     <header>
-        <img src="../images/breakapp preto.png" alt="breakapp preto" height="30px" width="auto">
+        <img src="../images/breakapp preto.png" alt="breakapp preto" height="30px" width="auto" />
     </header>
 
     <div class="wrapper">
@@ -21,75 +21,107 @@
             <div class="container-together">
                 <div class="container-input">
                     <p>Peso:</p>
-                    <input type="number" class="input-box">
+                    <input id="peso" type="number" class="input-box" min="0" />
                 </div>
                 <div class="container-input">
                     <p>Altura:</p>
-                    <input type="number" class="input-box">
+                    <input id="altura" type="number" class="input-box" min="0" />
                 </div>
             </div>
+
             <div class="container-input">
                 <p>Sexo:</p>
                 <div class="container-buttons">
-                    <button type="button" class="sex-button-masc">Masculino</button>
-                    <button type="button" class="sex-button-fem">Feminino</button>
+                    <button type="button" id="masculino" class="sex-button-masc">Masculino</button>
+                    <button type="button" id="feminino" class="sex-button-fem">Feminino</button>
                 </div>
             </div>
+
             <div class="container-input">
-                <p>Data de nascimento:</p>
-                <input type="date" class="birth-date">
+                <p>Idade:</p>
+                <input id="idade" type="number" min="0" max="120" class="input-box" />
             </div>
-            <button type="button" class="button-next">Próximo</button>
+
+            <button type="button" class="button-next" id="btnNext">Próximo</button>
+
+            <div id="resultado" style="display:none; margin-top: 20px;"></div>
+            <a href="/login" class="a-register">Ir para login</a>
         </div>
     </div>
-</body>
 
-</html>
-<!DOCTYPE html>
-<html lang="pt-BR">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sexoButtons = document.querySelectorAll(".container-buttons button");
+            const sexoInput = {
+                value: ""
+            };
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles-page2.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Cadastro</title>
-</head>
+            sexoButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    sexoButtons.forEach(btn => btn.classList.remove("selected"));
+                    button.classList.add("selected");
+                    sexoInput.value = button.id;
+                });
+            });
 
-<body>
-    <header>
-        <img src="../images/breakapp preto.png" alt="breakapp preto" height="30px" width="auto">
-    </header>
-    <form id="formcalculo">
-        <div class="wrapper">
-            <div class="container">
-                <div class="container-together">
-                    <div class="container-input">
-                        <p>Peso:</p>
-                        <input type="number" class="input-box">
-                    </div>
-                    <div class="container-input">
-                        <p>Altura:</p>
-                        <input type="number" class="input-box">
-                    </div>
-                </div>
-                <div class="container-input">
-                    <p>Sexo:</p>
-                    <div class="container-buttons">
-                        <button type="button" class="sex-button-masc">Masculino</button>
-                        <button type="button" class="sex-button-fem">Feminino</button>
-                    </div>
-                </div>
-                <div class="container-input">
-                    <p>Data de nascimento:</p>
-                    <input type="date" class="birth-date">
-                </div>
-                <button type="button" class="button-next">Próximo</button>
-            </div>
-        </div>
-    </form>
+            const btnNext = document.getElementById("btnNext");
+
+            btnNext.addEventListener("click", async() => {
+                const idade = parseInt(document.getElementById("idade").value, 10);
+                const peso = parseFloat(document.getElementById("peso").value);
+                const altura = parseFloat(document.getElementById("altura").value);
+                const sexo = sexoInput.value;
+
+                if (!sexo) {
+                    alert("Selecione o sexo antes de continuar.");
+                    return;
+                }
+
+                if (isNaN(idade) || isNaN(peso) || isNaN(altura)) {
+                    alert("Preencha todos os campos corretamente.");
+                    return;
+                }
+
+                const userData = {
+                    idade,
+                    peso,
+                    altura,
+                    sexo
+                };
+
+                try {
+                    const response = await fetch('/api/user/calcular', {
+                        method: 'POST',
+                        credentials: 'include',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        const resultadoDiv = document.getElementById("resultado");
+                        resultadoDiv.innerHTML = `
+              <h2>Resultado:</h2>
+              <p><strong>Idade:</strong> ${data.idade}</p>
+              <p><strong>Peso:</strong> ${data.peso} kg</p>
+              <p><strong>Altura:</strong> ${data.altura} m</p>
+              <p><strong>Sexo:</strong> ${data.sexo}</p>
+              <p><strong>IMC:</strong> ${data.imc.toFixed(2)}</p>
+              <p><strong>TMB:</strong> ${data.tmb.toFixed(2)}</p>
+            `;
+                        resultadoDiv.style.display = "block";
+                    } else {
+                        alert("Erro ao calcular: " + (data.erro || "Erro desconhecido"));
+                    }
+                } catch (error) {
+                    alert("Erro de conexão: " + error.message);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

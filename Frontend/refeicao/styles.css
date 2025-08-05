@@ -50,13 +50,15 @@ h1 {
 
 .search-bar {
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
 }
 
-.search-bar input[type="text"],
-.search-bar input[type="number"] {
+.search-bar input[type="text"] {
     padding: 10px 14px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -67,10 +69,56 @@ h1 {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.search-bar input:focus {
+.search-bar input[type="text"]:focus {
     border-color: #999;
 }
 
+/* Agrupa quantidade + botão para ficarem do mesmo tamanho */
+.input-group {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group input[type="number"],
+.input-group button {
+    width: 100%;
+    font-size: 16px;
+    border-radius: 24px;
+    outline: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    transition: border-color 0.2s;
+}
+
+/* input quantidade */
+.input-group input[type="number"] {
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    background: white;
+}
+
+.input-group input[type="number"]:focus {
+    border-color: #999;
+}
+
+/* botão adicionar alimento */
+.input-group button {
+    padding: 10px 0;
+    border: none;
+    background-color: #03afff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(3, 175, 255, 0.6);
+    transition: background 0.2s;
+}
+
+.input-group button:hover {
+    background-color: #13b6cc;
+}
+
+/* sugestões */
 .sugestoes-lista {
     margin-top: 8px;
     background: white;
@@ -81,21 +129,31 @@ h1 {
     padding: 0;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    width: 250px;
+    z-index: 100;
+}
+
+.sugestoes-lista:empty {
+    display: none; /* Esconde quando não há sugestões */
 }
 
 .sugestoes-lista li {
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.2s;
+    border-bottom: 1px solid #eee;
 }
 
-.sugestoes-lista li:hover {
-    background-color: #f1f1f1;
+.sugestoes-lista li:last-child {
+    border-bottom: none;
 }
+
+
 
 h2 {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 40px; /* + espaço para separar do input-group */
     margin-bottom: 10px;
 }
 
@@ -117,4 +175,20 @@ h2 {
 
 .selecionados .item:last-child {
     border-bottom: none;
+}
+#criarRefeicaoBtn {
+    margin-top: 20px;
+    padding: 10px 16px;
+    background-color: #0d6efd;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 450px;
+}
+
+#criarRefeicaoBtn:hover {
+    background-color: #084298;
 }

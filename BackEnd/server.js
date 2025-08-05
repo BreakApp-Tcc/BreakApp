@@ -16,24 +16,24 @@ app.use(session({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Usando as rotas para usuários e alimentos
+app.use('/api/user', userRoutes);
+app.use('/api/alimentos', alimentosRoutes);
+
+
 // Apenas redirecionando a raiz para /login
 app.get('/', (req, res) => {
     res.redirect('/login');
 });
 
 // Configuração da pasta estática
+app.use(express.static(path.join(__dirname, '../Frontend')));
 app.use(express.static(path.join(__dirname, '../Frontend/refeicao')));
 app.use(express.static(path.join(__dirname, '../Frontend/Login e Cadastro'), {
     setHeaders: (res, path) => {
-        if (path.endsWith('.html')) {
-            res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        }
-        if (path.endsWith('.js')) {
-            res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
-        }
-        if (path.endsWith('.css')) {
-            res.setHeader('Content-Type', 'text/css; charset=utf-8');
-        }
+        if (path.endsWith('.html')) res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        if (path.endsWith('.js')) res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+        if (path.endsWith('.css')) res.setHeader('Content-Type', 'text/css; charset=utf-8');
     }
 }));
 
@@ -57,10 +57,6 @@ app.get('/refeicoes', (req, res) => {
     res.type('html');
     res.sendFile(path.join(__dirname, '../Frontend/refeicao/refeicao.html'));
 });
-
-// Usando as rotas para usuários e alimentos
-app.use('/api/user', userRoutes);
-app.use('/api/alimentos', alimentosRoutes);
 
 // Rodando o servidor
 app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
