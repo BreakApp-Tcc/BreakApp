@@ -29,6 +29,7 @@ app.get('/', (req, res) => {
 // Configuração da pasta estática
 app.use(express.static(path.join(__dirname, '../Frontend')));
 app.use(express.static(path.join(__dirname, '../Frontend/refeicao')));
+app.use(express.static(path.join(__dirname, '../Frontend/homepage')));
 app.use(express.static(path.join(__dirname, '../Frontend/Login e Cadastro'), {
     setHeaders: (res, path) => {
         if (path.endsWith('.html')) res.setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -57,6 +58,12 @@ app.get('/refeicoes', (req, res) => {
     res.type('html');
     res.sendFile(path.join(__dirname, '../Frontend/refeicao/refeicao.html'));
 });
+// Rota homepage
+app.get('/homepage', (req, res) => {
+    res.type('html');
+    res.sendFile(path.join(__dirname, '../Frontend/homepage/html/homepage.html'));
+});
+
 
 // Rodando o servidor
 app.listen(3000, () => console.log('Servidor rodando na porta 3000'));

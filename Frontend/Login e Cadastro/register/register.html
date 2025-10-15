@@ -9,59 +9,66 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <title>Cadastro</title>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const form = document.getElementById("formcadastro");
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("formcadastro");
 
-            form.addEventListener("submit", async function(e) {
-                e.preventDefault();
+    form.addEventListener("submit", async function(e) {
+        e.preventDefault();
 
-                const senha = document.getElementById("senha").value;
-                const senhaConfirm = document.getElementById("senhaConfirma").value;
+        const senha = document.getElementById("senha").value;
+        const senhaConfirm = document.getElementById("senhaConfirma").value;
 
-                if (senha !== senhaConfirm) {
-                    alert("As senhas não coincidem.");
-                    return;
-                }
+        if (senha !== senhaConfirm) {
+            alert("As senhas não coincidem.");
+            return;
+        }
 
-                const dados = {
-                    nome_usuario: document.getElementById("nome_usuario").value,
-                    email: document.getElementById("email").value,
-                    senha: document.getElementById("senha").value
-                };
+        const dados = {
+            nome_usuario: document.getElementById("nome_usuario").value,
+            email: document.getElementById("email").value,
+            senha: senha
+        };
 
-                try {
-                    const res = await fetch("/api/user/cadastrar", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(dados),
-                    });
-
-                    if (res.ok) {
-                        const json = await res.json();
-                        alert(json.mensagem);
-                        localStorage.setItem("nome_usuario", dados.nome_usuario);
-                        window.location.href = "/register-page2";
-                    } else {
-                        let json;
-                        try {
-                            json = await res.json();
-                            alert(json.mensagem || "Erro ao cadastrar.");
-                        } catch {
-                            const text = await res.text();
-                            alert(text || "Erro ao cadastrar.");
-                        }
-                    }
-
-                } catch (error) {
-                    alert("Erro na requisição: " + error.message);
-                }
+        try {
+            const res = await fetch("/api/user/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dados),
             });
 
-        });
-    </script>
+            if (res.ok) {
+                // Cadastro bem-sucedido
+                const json = await res.json();
+                alert(json.mensagem);
+                localStorage.setItem("nome_usuario", dados.nome_usuario);
+                window.location.href = "/register-page2";
+            } else {
+                // Erro no cadastro
+                let mensagem = "Erro ao cadastrar.";
+                try {
+                    const json = await res.clone().json(); // tenta ler como JSON
+                    mensagem = json.mensagem || mensagem;
+                } catch {
+                    try {
+                        const text = await res.clone().text(); // tenta ler como texto
+                        mensagem = text || mensagem;
+                    } catch {
+                        // se falhar, mantém mensagem padrão
+                    }
+                }
+                alert(mensagem);
+            }
+
+        } catch (error) {
+            alert("Erro na requisição: " + error.message);
+        }
+    });
+});
+</script>
+
 
 </head>
 

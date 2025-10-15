@@ -83,10 +83,11 @@
                 }
 
                 const userData = {
-                    idade,
-                    peso,
-                    altura,
-                    sexo
+                    nome_usuario: localStorage.getItem("nome_usuario"),
+    idade: parseInt(document.getElementById("idade").value),
+    peso: parseFloat(document.getElementById("peso").value),
+    altura: parseFloat(document.getElementById("altura").value),
+    sexo: sexoInput.value
                 };
 
                 try {

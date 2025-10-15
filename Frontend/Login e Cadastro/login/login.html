@@ -61,7 +61,7 @@
                     });
 
                     if (response.ok) {
-                        alert('Login realizado com sucesso!');
+                          window.location.href = '/homepage';
                     } else {
                         const errorText = await response.text();
                         alert(errorText);

@@ -121,12 +121,15 @@ router.post('/login', (req, res) => {
 });
 
 // Rota calcular imc e tmb
+// Rota calcular IMC e TMB sem precisar de sessão
 router.post('/calcular', (req, res) => {
-    const { idade, peso, altura, sexo } = req.body;
-    if (!idade || !peso || !altura || !sexo) {
+    const { nome_usuario, idade, peso, altura, sexo } = req.body;
+
+    if (!nome_usuario || !idade || !peso || !altura || !sexo) {
         return res.status(400).json({ erro: "Todos os campos são obrigatórios." });
     }
 
+    // Calculando IMC e TMB
     const imc = peso / ((altura / 100) ** 2);
     const tmb = 10 * peso + 6.25 * altura * 100 - 5 * idade + (sexo === "masculino" ? 5 : -161);
 
@@ -135,15 +138,19 @@ router.post('/calcular', (req, res) => {
         SET idade = ?, peso = ?, altura = ?, sexo = ?, imc = ?, tmb = ?
         WHERE nome_usuario = ?
     `;
-    const params = [idade, peso, altura, sexo, imc, tmb, req.session.usuario];
+    const params = [idade, peso, altura, sexo, imc, tmb, nome_usuario];
 
     pool.query(sql, params, (err, result) => {
         if (err) {
             console.error("Erro na consulta:", err);
             return res.status(500).json({ erro: "Erro ao atualizar no banco." });
         }
-        res.json({ idade, peso, altura, sexo, imc, tmb });
+
+        // Retorna os valores calculados
+        res.json({ nome_usuario, idade, peso, altura, sexo, imc, tmb });
     });
 });
+
+
 
 module.exports = router;
