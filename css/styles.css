@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/** All items **/
+.all-items{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/** Searchbar **/
+#searchbar{
+    background-color: var(--color-white);
+    border-color: black;
+    width: 900px;
+    padding: 25px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#searchbar::placeholder{
+    font-size: 20px;
+    margin: 0px;
+    border: 0px;
+    padding-left: 20px;
+}
+
+/** Records **/
+.registros{
+    width: 900px;
+    background-color: #F2F2F2;
+    border-radius: 40px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.alimento{
+    background-color: white;
+    border-radius: 20px;
+    padding: 17px;
+}
+
+.all-alimentos{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

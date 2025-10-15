@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Alimentos</title>
+</head>
+
+<body>
+     <!-- Sidebar -->
+     <nav id="sidebar">
+        <div id="sidebar-content">
+            <div id="openbar">
+                <button id="openbar-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+            <ul class="sidebar-items">
+                <li class="side-item">
+                    <a href="#">
+                        <i class="fa-solid fa-utensils"></i>
+                        <span class="item-description">
+                            Dieta
+                        </span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a href="#">
+                        <i class="fa-solid fa-id-card"></i>
+                        <span class="item-description">
+                            Alimentos
+                        </span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a href="#">
+                        <i class="fa-solid fa-comment"></i>
+                        <span class="item-description">
+                            NutrIA
+                        </span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a href="#">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                        <span class="item-description">
+                            Planos
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="sidebar-content-config">
+            <ul class="sidebar-items">
+                <li id="side-item-config">
+                    <a href="#">
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="item-description">
+                            Configurações
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <h1>BreakApp</h1>
+    </main>
+
+    <div class="all-items">
+        <!-- Searchbar -->
+        <div class="searchbar">
+            <input type="text" id="searchbar" placeholder="Adicionar novo registro">
+        </div>
+
+        <!-- Records -->
+        <div class="registros">
+            <p>Seus registros</p>
+            <p>Data</p>
+            <div class="all-alimentos">
+                <div class="alimento"> Alimento 1</div>
+                <div class="alimento"> Alimento 2</div>
+                <div class="alimento"> Alimento 3</div>
+            </div>
+        </div>
+    </div>
+
+<!-- Scripts -->
+<script src="../scripts/sidebar.js"></script>
+
+</body>
+</html>
