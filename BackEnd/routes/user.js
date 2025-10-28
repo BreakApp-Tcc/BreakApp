@@ -122,6 +122,7 @@ router.post('/login', (req, res) => {
 
 // Rota calcular imc e tmb
 // Rota calcular IMC e TMB sem precisar de sessão
+// Rota calcular IMC e TMB
 router.post('/calcular', (req, res) => {
     const { nome_usuario, idade, peso, altura, sexo } = req.body;
 
@@ -129,9 +130,11 @@ router.post('/calcular', (req, res) => {
         return res.status(400).json({ erro: "Todos os campos são obrigatórios." });
     }
 
-    // Calculando IMC e TMB
+    // Calculando IMC (altura em cm)
     const imc = peso / ((altura / 100) ** 2);
-    const tmb = 10 * peso + 6.25 * altura * 100 - 5 * idade + (sexo === "masculino" ? 5 : -161);
+
+    // Calculando TMB (Mifflin-St Jeor) -> altura já em cm
+    const tmb = 10 * peso + 6.25 * altura - 5 * idade + (sexo === "masculino" ? 5 : -161);
 
     const sql = `
         UPDATE usuario
@@ -146,10 +149,10 @@ router.post('/calcular', (req, res) => {
             return res.status(500).json({ erro: "Erro ao atualizar no banco." });
         }
 
-        // Retorna os valores calculados
         res.json({ nome_usuario, idade, peso, altura, sexo, imc, tmb });
     });
 });
+
 
 
 

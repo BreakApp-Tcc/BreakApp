@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="../styles/styles-page2.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
     <title>Cadastro</title>
 </head>
 
@@ -21,11 +23,11 @@
             <div class="container-together">
                 <div class="container-input">
                     <p>Peso:</p>
-                    <input id="peso" type="number" class="input-box" min="0" />
+                    <input id="peso(kg)" type="number" class="input-box" min="0" />
                 </div>
                 <div class="container-input">
                     <p>Altura:</p>
-                    <input id="altura" type="number" class="input-box" min="0" />
+                    <input id="altura(cm)" type="number" class="input-box" min="0" />
                 </div>
             </div>
 
@@ -66,7 +68,7 @@
 
             const btnNext = document.getElementById("btnNext");
 
-            btnNext.addEventListener("click", async() => {
+            btnNext.addEventListener("click", async () => {
                 const idade = parseInt(document.getElementById("idade").value, 10);
                 const peso = parseFloat(document.getElementById("peso").value);
                 const altura = parseFloat(document.getElementById("altura").value);
@@ -84,10 +86,10 @@
 
                 const userData = {
                     nome_usuario: localStorage.getItem("nome_usuario"),
-    idade: parseInt(document.getElementById("idade").value),
-    peso: parseFloat(document.getElementById("peso").value),
-    altura: parseFloat(document.getElementById("altura").value),
-    sexo: sexoInput.value
+                    idade: parseInt(document.getElementById("idade").value),
+                    peso: parseFloat(document.getElementById("peso").value),
+                    altura: parseFloat(document.getElementById("altura").value),
+                    sexo: sexoInput.value
                 };
 
                 try {

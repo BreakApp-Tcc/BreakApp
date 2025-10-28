@@ -1,4 +1,3 @@
-
 services:
 
   node_app:
@@ -6,16 +5,33 @@ services:
       context: ./BackEnd
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"  
+      - "3000:3000"
     depends_on:
-      - db  
+      - db
     networks:
-      - app_network  
+      - app_network
     volumes:
-      - ./BackEnd:/BackEnd  
+      - ./BackEnd:/BackEnd
       - ./Frontend:/Frontend
 
-  
+  backend_java:
+    build:
+      context: ./backend-java
+      dockerfile: Dockerfile.backend-java
+    container_name: breakapp-java
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+     GEMINI_API_URL: "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
+     GEMINI_API_KEY: "AIzaSyDyjbosGjeHNd7EYyeR4WR6VT6VaPcX25Q"
+
+    depends_on:
+      - db
+    networks:
+      - app_network
+
   db:
     image: mysql:8.0
     environment:
@@ -26,16 +42,14 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql  
-      - ./BackEnd/docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql  
+      - mysql_data:/var/lib/mysql
+      - ./BackEnd/docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - app_network  
-
+      - app_network
 
 volumes:
-  mysql_data:  
-
+  mysql_data:
 
 networks:
   app_network:
-    driver: bridge  
+    driver: bridge
