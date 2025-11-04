@@ -32,10 +32,11 @@ main {
     flex-direction: column;
     background-color: var(--color-white);
     height: 100vh;
-    position: relative;
+    position: fixed;
     transition: all .5s;
-    min-width: 80px;
+    width: 80px;
     justify-content: space-between;
+    overflow: hidden;
 }
 
 #sidebar-content {
@@ -109,7 +110,7 @@ main {
 }
 
 #sidebar.open-sidebar {
-    min-width: 100px;
+    width: 200px;
 }
 
 #sidebar.open-sidebar .item-description {

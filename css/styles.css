@@ -1,14 +1,17 @@
-/** All items **/
+body{
+    display: block;
+}
+
 #page{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 20px;
-    max-width: 900px;
+    gap: 50px;
+    max-width: 1100px;
     width: 100%;
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 500px;
     padding: 20px;
     box-sizing: border-box;
     min-height: 100vh;
@@ -16,97 +19,156 @@
     transition: margin-left 0.4s ease;
 }
 
-#sidebar.open-sidebar ~ #page{
-    margin-left: 150px;
+#sidebar.open-sidebar ~ #page {
+    margin-left: 250px;
 }
 
-/** Searchbar **/
-#searchbar{
-    border: 2px solid #000;
-    outline: none;
-    font-size: 20px;
-    width: 900px;
-    padding: 25px;
-    border-radius: 50px;
+/** Profile section **/
+.profile-container{
+    display: flex;
+    gap: 50px;
+    max-width: 840px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.profile-pic{
+    width: 150px;
+    height: 150px;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+}
+
+.profile-items{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/** Progrees section **/
+#Progress{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    max-width: 840px;
+    width: 100%;
+}
+
+.charts{
+    display: flex;
+    flex-direction: row;
+    gap: 120px;
+}
+
+.chart-container{
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-}
-
-#searchbar::placeholder{
-    font-size: 20px;
-    margin: 0px;
-    border: 0px;
-    padding-left: 20px;
-}
-
-
-#searchbar:focus{
-    border-color: #78a97f;
-    outline: none;
-}
-
-/** Records **/
-.registros{
-    width: 900px;
-    background-color: #F2F2F2;
-    border-radius: 40px;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 17px;
-}
-
-.all-alimentos{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.alimento{
+    text-align: center;
     background-color: white;
     border-radius: 20px;
-    padding: 17px;
-    text-align: start;
-    border-style: none;
+    width: 200px;
+    height: 150px;
 }
 
-.alimento {
-    background-color: #FFFFFF;
-    color: #000000;
-    border-radius: 20px;         
-    padding: 15px 20px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    display: block;
-    width: 100%;
-    text-align: start;
-    transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.alimento:hover {
-    background-color: #f5f5f5;
-    transform: scale(1.03);
-    border-color: #85b892;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.alimento:active {
-    background-color: #f0f0f0;
-    transform: scale(0.97);
-    border-color: #78a97f;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-}
-
-.alimento:focus {
-    outline: 2px solid #9BCA9F;
-    outline-offset: 3px;
-}
-
-.all-alimentos {
+/** Sequence and water section **/
+.water-container{
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
+}
+
+.sequence-water{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 840px; 
+}
+
+.sequence-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sequence{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 100px;
+    width: 100%;
+    height: 85px;
+}
+
+#day{
+    display: flex;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+    padding: 30px;
+}
+
+.water-section{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 30px;
+    width: 300px;
+    height: 85px;
+    border-radius: 50px;
+}
+
+.waterbar{
+    background-color: #D9D9D9;
+    padding: 10px;
+    border-radius: 50px;
+}
+
+/** Diet plan section**/
+#containers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 840px;
+    border-radius: 20px;
+    padding: 50px;
+    background-color: white;
+}
+
+.progressBar{
+    background-color: #D9D9D9;
+    padding: 10px;
+    width: 575px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+button{
+    padding: 10px;
+    width: 600px;
+    border-style: none;
+    border-radius: 20px;
+    background-color: #9BCA9F;
+}
+
+/** Data section**/
+.data-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

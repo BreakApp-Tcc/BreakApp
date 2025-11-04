@@ -1,11 +1,10 @@
-(function() {
-    const alimentos = document.querySelectorAll('.alimento');
-
-    const overlay = document.getElementById('overlay-alimento');
-    const modal = overlay.querySelector('.modal');
-    const closeBtn = document.getElementById('closeBtn-alimento');
-    const cancelBtn = document.getElementById('cancelBtn-alimento');
-    const modalContent = document.getElementById('modal-content-alimento');
+(function () {
+    const openBtn = document.getElementById('openModal');
+    const overlay = document.getElementById('overlay');
+    const modal = document.getElementById('myModal');
+    const closeBtn = document.getElementById('closeBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const confirmBtn = document.getElementById('confirmBtn');
 
     let lastFocusedElement = null;
 
@@ -15,17 +14,14 @@
         )).filter(el => el.offsetParent !== null);
     }
 
-    function openModal(content) {
+    function openModal() {
         lastFocusedElement = document.activeElement;
-        modalContent.textContent = content;
         overlay.classList.add('open');
         overlay.setAttribute('aria-hidden', 'false');
         document.documentElement.style.overflow = 'hidden';
-
         const focusable = getFocusableElements(modal);
         if (focusable.length) focusable[0].focus();
         else modal.focus();
-
         document.addEventListener('keydown', onKeyDown);
     }
 
@@ -63,16 +59,17 @@
         }
     }
 
-    alimentos.forEach(alimento => {
-        alimento.addEventListener('click', () => {
-            openModal(alimento.textContent.trim());
-        });
-    });
+    openBtn.addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
     cancelBtn.addEventListener('click', closeModal);
-
     overlay.addEventListener('click', (e) => {
         if (e.target === overlay) closeModal();
     });
 
+    confirmBtn.addEventListener('click', () => {
+        console.log('Usuário confirmou!');
+        closeModal();
+    });
+
+    overlay.setAttribute('aria-hidden', 'true');
 })();
