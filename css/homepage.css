@@ -23,7 +23,7 @@ body {
     background-color: var(--color-background);
     color: var(--color-items);
     font-family: "Inter", sans-serif;
-    height: 100vh;
+    height: 100dvh;
     margin: 0;
     padding: 0;
     display: flex;
@@ -186,15 +186,19 @@ p{
     display: flex;
     flex-direction: column;
     background-color: var(--color-container);
-    height: 100vh;
+    height: 100dvh;
     position: relative;
     justify-content: space-between;
     min-width: 80px;
-    transition: all .5s;
+    transition: 0.4s ease;
 }
-
 #sidebar-content {
     padding: 15px;
+}
+
+#sidebar-content-config {
+    padding: 15px;
+    margin-top: auto;
 }
 
 .sidebar-items {
@@ -212,14 +216,13 @@ p{
     text-overflow: ellipsis;
     font-size: 14px;
     height: 0px;
-    transition: all .5s;
+    transition: 0.4s ease;
 }
 
 #side-item-config {
     cursor: pointer;
     border-radius: 8px;
     padding: 15px;
-    margin-top: 700px;
 }
 
 #side-item-config:hover{
@@ -236,18 +239,18 @@ p{
     background-color: var(--color-background);
 }
 
-.side-item a, #side-item-config a{
+.side-item a, #side-item-config a {
     text-decoration: none;
     display: flex;
     color: var(--color-items);
 }
 
+/** Openbar **/
 #openbar-content {
     display: flex;
     justify-content: start;
 }
 
-/** Side-Button**/
 #openbar-btn {
     border: none;
     cursor: pointer;
