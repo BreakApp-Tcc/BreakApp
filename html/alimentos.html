@@ -9,17 +9,16 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/alimentos.css">
     <link rel="stylesheet" href="../css/popup-alimento.css">
     <title>Alimentos</title>
 </head>
 
 <body>
-     <!-- Sidebar -->
-     <nav id="sidebar">
+      <!-- Sidebar -->
+    <nav id="sidebar">
         <div id="sidebar-content">
-            <div id="openbar">
+            <div id="openbar-content">
                 <button id="openbar-btn">
                     <i class="fa-solid fa-bars"></i>
                 </button>
@@ -60,10 +59,7 @@
                         </span>
                     </a>
                 </li>
-            </ul>
-        </div>
-        <div id="sidebar-content-config">
-            <ul class="sidebar-items">
+
                 <li id="side-item-config">
                     <a href="#">
                         <i class="fa-solid fa-gear"></i>
@@ -73,8 +69,12 @@
                     </a>
                 </li>
             </ul>
-        </div>
     </nav>
+
+    <main>
+        <h1>BreakApp</h1>
+        <button id="dark-mode">Modo Escuro</button>
+    </main>
 
     <div id="page">
         <!-- Searchbar -->
@@ -132,6 +132,7 @@
 <!-- Scripts -->
 <script src="../scripts/sidebar.js"></script>
 <script src="../scripts/popup-alimento.js"></script>
+<script src="../dark-mode.js"></script>
 
 </body>
 </html>
