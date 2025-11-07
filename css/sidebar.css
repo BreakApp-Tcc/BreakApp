@@ -1,9 +1,0 @@
-/** color and transitions variables **/
-:root {
-    --color-container: #D9D9D9;
-    --color-black: #000000;
-    --color-white: #ffffff;
-    --color-button-transition: rgb(0, 0, 0);
-    --color-button: #9bca9f;
-    --color-link: #808080;
-}
