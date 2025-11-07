@@ -46,12 +46,75 @@ body {
     transition: margin-left 0.4s ease;
 }
 
+.container{
+    width: 1100px;
+    height: 100%;
+    margin:auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--color-background);
+    gap: 30px;
+}
+.card{
+    width: 300px;
+    height: auto;
+    padding: 10px;
+    text-align: center;
+    border-radius: 15px;
+    border: solid black;
+    transition: transform 0.3s;
+    background-color: var(--color-container);
+    color: var(--color-items);
+}
+.card:hover{
+    transform: scale(1.050);
+}
+.card-name{
+    margin-top: 10px;
+    border-bottom: 2px solid black;
+    padding-bottom: 35px;
+}
+.card-name > p{
+    cursor: default;
+}
+.card-content > ul{
+    padding: 10px 30px;
+    padding-bottom: 20px;
+    cursor: default;
+
+}
+.card-content > ul, li{
+    list-style: none;
+    padding: 10px 0;
+}
+.card-content > ul, li, i{
+    margin-right: 10px;
+}
+.card-content > button{
+    width: 120px;
+    padding: 10px 20px;
+    background-color: var(--color-background);
+    border-radius: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+.card-content > button, a{
+    text-decoration: none;
+    color: var(--color-items);
+}
+.card-content > button:hover{
+    transform: scale(1.100);
+}
 
 main {
     padding: 20px;
     color: var(--color-items);
 }
-
 main > button {
     border: none;
     cursor: pointer;
@@ -60,102 +123,10 @@ main > button {
     margin-bottom: 50px;
     background-color: var(--color-container);
     color: var(--color-items);
-    font-size: 16px;
+    font-size: 12px;
 }
-
-#sidebar.open-sidebar ~ #page{
-    margin-left: 150px;
-}
-
-/** Searchbar **/
-#searchbar{
-    border: 2px solid #000;
-    outline: none;
-    font-size: 20px;
-    width: 900px;
-    padding: 25px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-#searchbar::placeholder{
-    font-size: 20px;
-    margin: 0px;
-    border: 0px;
-    padding-left: 20px;
-}
-
-
-#searchbar:focus{
-    border-color: #78a97f;
-    outline: none;
-}
-
-/** Records **/
-.registros{
-    width: 900px;
-    background-color: var(--color-container);
-    border-radius: 40px;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 17px;
-}
-
-.all-alimentos{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.alimento{
-    background-color: white;
-    border-radius: 20px;
-    padding: 17px;
-    text-align: start;
-    border-style: none;
-}
-
-.alimento {
-    background-color: #ffffff;
-    color: #000000;
-    border-radius: 20px;         
-    padding: 15px 20px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    display: block;
-    width: 100%;
-    text-align: start;
-    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.alimento:hover {
-    background-color: #f5f5f5;
-    transform: scale(1.03);
-    border-color: #85b892;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.alimento:active {
-    background-color: #f0f0f0;
-    transform: scale(0.97);
-    border-color: #78a97f;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-}
-
-.alimento:focus {
-    outline: 2px solid #9BCA9F;
-    outline-offset: 3px;
-}
-
-.all-alimentos {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+main > button:hover{
+    transform: scale(1.100);
 }
 
 /** Side bar **/
@@ -247,6 +218,10 @@ color: var(--color-items)
 }
 
 /** Toggle-Sidebar **/
+#sidebar.open-sidebar ~ #page{
+    margin-left: 150px;
+}
+
 #sidebar.open-sidebar {
     min-width: 100px;
 }
