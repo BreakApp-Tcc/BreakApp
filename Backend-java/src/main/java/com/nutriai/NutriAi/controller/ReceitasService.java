@@ -26,12 +26,20 @@ public class ReceitasService {
         try {
             // Corpo no formato EXATO que o Gemini espera
             Map<String, Object> requestBody = Map.of(
-                    "contents", new Object[]{
-                            Map.of("parts", new Object[]{
-                                    Map.of("text", question)
-                            })
-                    }
-            );
+    "contents", new Object[]{
+        Map.of("parts", new Object[]{
+            // Prompt para filtrar todas respostas, afim de que a API so responda perguntas relacionadas a culinária e nutrição
+            Map.of("text", 
+                "Você é um assistente especializado em culinária. " +
+                "Responda APENAS perguntas relacionadas a receitas, culinária, nutrição ou preparo de alimentos. " +
+                "Se a pergunta não for sobre isso, diga educadamente que só responde dúvidas culinárias."
+            ),
+            // Pergunta do usuário
+            Map.of("text", question)
+        })
+    }
+);
+
 
             // Envia a requisição à API Gemini
             String response = webClient.post()

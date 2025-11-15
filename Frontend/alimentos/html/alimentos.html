@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/alimentos.css">
+    <link rel="stylesheet" href="../css/popup-alimento.css">
+    <title>Alimentos</title>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div id="sidebar-content">
+            <div id="openbar-content">
+                <button id="openbar-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+            <ul class="sidebar-items">
+                <li class="side-item">
+                    <a href="/dieta">
+                        <i class="fa-solid fa-utensils"></i>
+                        <span class="item-description">
+                            Dieta
+                        </span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a href="#">
+                        <i class="fa-solid fa-id-card"></i>
+                        <span class="item-description">
+                            Alimentos
+                        </span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a href="http://localhost:5173">
+                        <i class="fa-solid fa-comment"></i>
+                        <span class="item-description">
+                            NutrIA
+                        </span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a href="#">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                        <span class="item-description">
+                            Planos
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="sidebar-content-config">
+            <ul class="sidebar-items">
+                <li id="side-item-config">
+                    <a href="#">
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="item-description">
+                            Configurações
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <h1>BreakApp</h1>
+        <button id="dark-mode">Modo Escuro</button>
+    </main>
+
+    <div id="page">
+        <!-- Searchbar -->
+        <div class="searchbar-container">
+            <div class="searchbar">
+                <input type="text" id="searchbar" placeholder="Adicionar novo registro" autocomplete="off">
+                <button id="add-alimento-btn" title="Adicionar alimento" class="btn-add-alimento">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <ul id="sugestoes-lista" class="sugestoes-lista"></ul>
+        </div>
+
+
+        <!-- Records -->
+<div class="registros">
+    <h3>Seus registros</h3>
+    <div class="all-registros" id="all-registros">
+        <!-- Aqui os registros serão adicionados -->
+    </div>
+</div>
+
+
+
+
+    </div>
+
+    <!-- Modal - Popup window -->
+    <div class="overlay" id="overlay-alimento" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" tabindex="-1">
+            <button class="close-btn" id="closeBtn-alimento" aria-label="Fechar janela (Esc)">✕</button>
+
+            <div class="modal-header">
+                <div class="modal-title">Detalhes do alimento</div>
+            </div>
+
+            <div class="modal-body">
+                <h3 id="modal-content-alimento">Conteúdo do alimento...</h3>
+                <div class="modal-textalign">
+                    <p>Categoria</p>
+                    <p>Descrição de preparação</p>
+                </div>
+                <div class="modal-infos">
+                    <p>Energia: </p>
+                    <p>Proteína: </p>
+                    <p>Carboidrato: </p>
+                    <p>Fibra total: </p>
+                    <p>Açúcar total: </p>
+                    <p>Açúcar adicional: </p>
+                    <p>Colesterol: </p>
+                    <p>Lípidios totais: </p>
+                    <p>Sódio: </p>
+                    <p>Vitaminas: </p>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelBtn-alimento">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Pop-up novo alimento -->
+<div class="overlay" id="overlay-novo-alimento" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" tabindex="-1">
+        <button class="close-btn" id="closeBtn-novo-alimento" aria-label="Fechar janela (Esc)">✕</button>
+
+        <div class="modal-header">
+            <div class="modal-title">Criar Novo Alimento</div>
+        </div>
+
+        <div class="modal-body">
+            <form id="form-novo-alimento">
+                <div class="modal-textalign">
+                    <label for="nome">Nome do alimento:</label>
+                    <input type="text" id="nome" required autocomplete="off">
+                </div>
+
+                <div class="modal-textalign">
+                    <label for="carbo">Carboidratos (g):</label>
+                    <input type="number" id="carbo" min="0" step="0.1" required autocomplete="off">
+                </div>
+
+                <div class="modal-textalign">
+                    <label for="proteina">Proteínas (g):</label>
+                    <input type="number" id="proteina" min="0" step="0.1" required autocomplete="off">
+                </div>
+
+                <div class="modal-textalign">
+                    <label for="gordura">Gorduras (g):</label>
+                    <input type="number" id="gordura" min="0" step="0.1" required autocomplete="off">
+                </div>
+
+                <div class="modal-footer" style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px;">
+                    <button type="submit" class="btn-primary" id="salvar-novo-alimento">Salvar</button>
+                    <button type="button" class="btn-secondary" id="cancelar-novo-alimento">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+    <div id="popup-sucesso" class="popup-sucesso">
+        <div class="popup-conteudo"> Refeição salva com sucesso!</div>
+    </div>
+    <div id="popup-alimento-sucesso" class="popup-alimento-sucesso">
+        <div class="popup-conteudo"> Alimento criado com sucesso!</div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/scripts/sidebar.js"></script>
+    <script src="/scripts/popup-alimento.js"></script>
+    <script src="/scripts/dark-mode.js"></script>
+    <script src="/scripts/script.js"></script>
+</body>
+
+</html>

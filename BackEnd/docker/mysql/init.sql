@@ -75,7 +75,8 @@ CREATE TABLE alimentos (
 CREATE TABLE refeicoes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
-    data_hora DATETIME NOT NULL
+    categoria ENUM('cafe', 'almoco', 'janta') NOT NULL,
+	data_hora DATETIME NOT NULL
 ) ENGINE=InnoDB
   DEFAULT CHARSET=utf8mb4
   COLLATE=utf8mb4_general_ci;
@@ -2070,6 +2071,11 @@ INSERT INTO `alimentos` (`Codigo`, `descricao_do_alimento`, `Categoria`, `Codigo
 	(8579006, 'Arroz com ovo', 'Miscelâneas', 99, 'Não se aplica', '179.11', '8.09', '9.43', '14.50', '0.77', '230.44', '2.43', '3.02', '2.82', '2.48', '0.26', '0.02', '0.66', NULL, '28.93', '6.55', '0.16', '102.36', '0.69', '67.99', '293.50', '75.74', '0.01', '0.81', '18.14', '91.30', '92.03', '0.04', '0.28', '0.04', '1.42', '0.07', '0.60', '23.91', '0.70', '0.81', NULL),
 	(8800109, 'Palma', 'Miscelâneas', 99, 'Não se aplica', '41.95', '1.35', '3.10', '3.28', '2.00', NULL, '0.48', '0.70', '1.78', '1.57', '0.21', '0.02', '1.27', NULL, '164.00', '47.00', '0.41', '16.00', '0.50', '20.00', NULL, '195.00', '0.05', '0.21', '2.10', NULL, '22.13', '0.01', '0.04', '0.30', '0.53', '0.07', NULL, '3.00', NULL, '0.25', '5.30');
 
+UPDATE alimentos 
+    -> SET nome = CONVERT(CAST(CONVERT(nome USING latin1) AS BINARY) USING utf8mb4);
+UPDATE alimentos
+SET descricao_da_preparacao = ''
+WHERE descricao_da_preparacao = 'Não se aplica';
 
 
 ALTER USER 'usuario'@'%' IDENTIFIED WITH caching_sha2_password BY 'senhausuario';

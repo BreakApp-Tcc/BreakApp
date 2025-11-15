@@ -19,6 +19,23 @@ const validarEmail = (email) => {
     return regex.test(email);
 };
 
+// Retorna dados do usuário (ex.: logado)
+router.get('/', (req, res) => {
+    const nome_usuario = req.session.usuario; // pega o nome salvo na sessão após login
+    if (!nome_usuario) return res.status(400).json({ erro: 'Usuário não está logado' });
+
+    pool.query(
+        'SELECT nome_usuario AS nome, peso, altura, imc, tmb FROM usuario WHERE nome_usuario = ?',
+        [nome_usuario],
+        (err, results) => {
+            if (err) return res.status(500).json({ erro: 'Erro no servidor' });
+            if (!results.length) return res.status(404).json({ erro: 'Usuário não encontrado' });
+            res.json(results[0]);
+        }
+    );
+});
+
+
 // Rota para cadastro
 router.post('/cadastrar', (req, res) => {
     const { nome_usuario, senha, email } = req.body;
@@ -120,8 +137,6 @@ router.post('/login', (req, res) => {
     }
 });
 
-// Rota calcular imc e tmb
-// Rota calcular IMC e TMB sem precisar de sessão
 // Rota calcular IMC e TMB
 router.post('/calcular', (req, res) => {
     const { nome_usuario, idade, peso, altura, sexo } = req.body;
@@ -133,7 +148,7 @@ router.post('/calcular', (req, res) => {
     // Calculando IMC (altura em cm)
     const imc = peso / ((altura / 100) ** 2);
 
-    // Calculando TMB (Mifflin-St Jeor) -> altura já em cm
+    // Calculando TMB (altura já em cm)
     const tmb = 10 * peso + 6.25 * altura - 5 * idade + (sexo === "masculino" ? 5 : -161);
 
     const sql = `

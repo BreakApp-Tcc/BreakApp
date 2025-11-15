@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans:wght@100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/dieta-styles.css">
+  <link rel="stylesheet" href="/css/dieta-sidebar.css">
+  <link rel="stylesheet" href="/css/dieta-popup.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Dieta</title>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <nav id="sidebar">
+    <div id="sidebar-content">
+      <div id="openbar">
+        <button id="openbar-btn">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+      <ul class="sidebar-items">
+        <li class="side-item">
+          <a href="#">
+            <i class="fa-solid fa-utensils"></i>
+            <span class="item-description">Dieta</span>
+          </a>
+        </li>
+        <li class="side-item">
+          <a href="/alimentos">
+            <i class="fa-solid fa-id-card"></i>
+            <span class="item-description">Alimentos</span>
+          </a>
+        </li>
+        <li class="side-item">
+          <a href="http://localhost:5173">
+            <i class="fa-solid fa-comment"></i>
+            <span class="item-description">NutrIA</span>
+          </a>
+        </li>
+        <li class="side-item">
+          <a href="#">
+            <i class="fa-regular fa-pen-to-square"></i>
+            <span class="item-description">Planos</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id="sidebar-content-config">
+      <ul class="sidebar-items">
+        <li id="side-item-config">
+          <a href="#">
+            <i class="fa-solid fa-gear"></i>
+            <span class="item-description">Configurações</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="page">
+    <div class="profile-container">
+      <div class="profile-pic" id="profilePic">
+        <img id="profileImage" src="" alt="Foto de perfil" style="display:none;">
+      </div>
+
+      <input type="file" id="profileInput" accept="image/*" style="display:none;">
+
+      <div class="profile-items">
+        <h2>Perfil</h2>
+        <h3 id="perfil-nome">Carregando...</h3>
+        <h3>Peso: <span id="perfil-peso">0</span> kg</h3>
+        <h3>Altura: <span id="perfil-altura">0</span> m</h3>
+        <button id="openModal" class="popup-btn">Atualizar dados</button>
+      </div>
+    </div>
+
+    <div id="Progress">
+      <h1>Progresso</h1>
+      <div class="charts">
+        <div class="chart-container">
+          <div class="chart">
+            <h2>IMC</h2>
+            <p><strong>IMC:</strong> <span id="valor-imc">--</span></p>
+          </div>
+        </div>
+        <div class="chart-container">
+          <div class="chart">
+            <h2>TMB</h2>
+            <p><strong>TMB:</strong> <span id="valor-tmb">--</span></p>
+          </div>
+        </div>
+        <div class="chart-container">
+          <div class="chart">
+            <h2>Calorias Diárias</h2>
+            <p><strong>Total:</strong> <span id="valor-calorias">--</span></p>
+            <p id="comparacao-calorias" style="font-weight: bold;">--</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="meta-container">
+      <h1>Meta de Peso</h1>
+
+      <div class="meta-input-area">
+        <label for="metaPeso">Definir meta (kg):</label>
+        <input type="number" id="metaPeso" placeholder="Ex: 70">
+        <button id="salvarMetaBtn">Salvar meta</button>
+      </div>
+
+      <p id="metaStatus">Nenhuma meta definida.</p>
+
+      <div class="grafico-container">
+        <canvas id="graficoPeso"></canvas>
+      </div>
+    </div>
+
+    <div id="containers">
+      <h2>Plano de dieta</h2>
+      <div class="container">
+        <h3>Café da manhã</h3>
+        <p class="refeicao-info">*Visão geral*</p>
+        <div class="progressBar"></div>
+        <button class="btn-refeicao" data-tipo="cafe">Mais informações</button>
+      </div>
+      <div class="container">
+        <h3>Almoço</h3>
+        <p class="refeicao-info">*Visão geral*</p>
+        <div class="progressBar"></div>
+        <button class="btn-refeicao" data-tipo="almoco">Mais informações</button>
+      </div>
+      <div class="container">
+        <h3>Janta</h3>
+        <p class="refeicao-info">*Visão geral*</p>
+        <div class="progressBar"></div>
+        <button class="btn-refeicao" data-tipo="janta">Mais informações</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" tabindex="-1">
+      <button class="close-btn" id="closeBtn">✕</button>
+      <div class="modal-header">
+        <div class="modal-title">Atualizar dados do perfil</div>
+      </div>
+      <div class="modal-body">
+        <div class="input-container">
+          <h3>Alterar nome:</h3>
+          <input type="text" class="input-att" id="input-nome" placeholder="Digite aqui seu nome" autocomplete="off">
+        </div>
+        <div class="input-container">
+          <h3>Alterar peso:</h3>
+          <input type="text" class="input-att" id="input-peso" placeholder="Digite aqui seu peso" autocomplete="off">
+        </div>
+        <div class="input-container">
+          <h3>Alterar altura:</h3>
+          <input type="text" class="input-att" id="input-altura" placeholder="Digite aqui sua altura"
+            autocomplete="off">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="cancelBtn">Cancelar</button>
+        <button class="btn-primary" id="confirmBtn">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="popupRefeicao" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" tabindex="-1">
+      <button class="close-btn" id="closeRefeicao">✕</button>
+      <div class="modal-header">
+        <div class="modal-title" id="tituloRefeicao">Detalhes da refeição</div>
+      </div>
+      <div class="modal-body" id="conteudoRefeicao">
+        <p>Carregando informações...</p>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="/scripts/dieta-sidebar.js"></script>
+  <script src="/scripts/dieta-popup.js"></script>
+  <script src="/scripts/dieta-script.js"></script>
+</body>
+
+</html>

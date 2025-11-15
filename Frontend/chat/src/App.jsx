@@ -73,7 +73,6 @@ function App() {
       // Limpa o texto removendo asteriscos e formatação
       text = cleanText(text);
 
-      // Se a API retornar candidatos (como no Google Gemini), formata a resposta
       if (apiResponse?.candidates && apiResponse.candidates.length > 0) {
         const candidate = apiResponse.candidates[0];
         let recipeText = candidate.content?.parts[0]?.text || text;
@@ -108,6 +107,12 @@ function App() {
         {/* Header com gradiente verde */}
         <header className="bg-gradient-to-r from-black-500 to-black-600 text-black text-center py-4 font-bold text-lg">
           NutriAI
+           <button
+            onClick={() => window.location.href = 'http://localhost:3000/homepage'}
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white text-green-700 px-3 py-1 rounded-lg text-sm font-semibold hover:bg-green-100 transition"
+          >
+            ← Voltar
+          </button>
         </header>
 
         {/* Área de mensagens */}

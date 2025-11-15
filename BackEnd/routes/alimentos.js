@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
     }
 
     try {
-        const [rows] = await pool.query(`SELECT Codigo, descricao_do_alimento, Energia_kcal, Proteina_g, Lipidios_totais_g, Carboi_drato_g 
+        const [rows] = await pool.query(`SELECT Codigo, descricao_do_alimento, descricao_da_preparacao, Energia_kcal, Proteina_g, Lipidios_totais_g, Carboi_drato_g 
      FROM alimentos 
      WHERE LOWER(descricao_do_alimento) LIKE ?
      LIMIT 15`,
@@ -87,6 +87,137 @@ router.post('/salvar-refeicao', async (req, res) => {
         conn.release();
     }
 });
+
+// Rota GET que lista todas as refeições com seus alimentos
+router.get('/refeicoes', async (req, res) => {
+    try {
+        const [refeicoes] = await pool.query('SELECT * FROM refeicoes ORDER BY data_hora DESC');
+        const resultado = [];
+
+        for (const r of refeicoes) {
+            const [alimentos] = await pool.query(
+                'SELECT descricao, quantidade, energia, proteina, lipidio, carboidrato FROM refeicao_alimentos WHERE refeicao_id = ?',
+                [r.id]
+            );
+            resultado.push({ ...r, alimentos });
+        }
+
+        res.json(resultado);
+    } catch (err) {
+        console.error('Erro ao buscar refeições:', err);
+        res.status(500).json({ erro: 'Erro ao buscar refeições' });
+    }
+});
+
+
+// Rota para buscar os alimentos de cada tipo de refeição
+router.get('/refeicao/:categoria', async (req, res) => {
+  const { categoria } = req.params;
+
+  try {
+    const [refeicoes] = await pool.query(
+      `SELECT id, nome, data_hora
+       FROM refeicoes
+       WHERE LOWER(nome) = LOWER(?)
+       ORDER BY data_hora DESC`,
+      [categoria]
+    );
+
+    if (refeicoes.length === 0) {
+      return res.status(404).json({ refeicao: null, alimentos: [] });
+    }
+
+    let todosAlimentos = [];
+
+    for (const ref of refeicoes) {
+      const [alimentos] = await pool.query(
+        `SELECT 
+          descricao AS nome_alimento,
+          quantidade,
+          energia AS calorias,
+          proteina,
+          lipidio,
+          carboidrato
+        FROM refeicao_alimentos
+        WHERE refeicao_id = ?`,
+        [ref.id]
+      );
+
+      todosAlimentos = todosAlimentos.concat(alimentos);
+    }
+
+    res.json({
+      refeicao: {
+        nome: categoria,
+        total_registros: refeicoes.length
+      },
+      alimentos: todosAlimentos
+    });
+
+  } catch (err) {
+    console.error("Erro ao buscar dados da refeição:", err);
+    res.status(500).json({ erro: "Erro interno ao buscar refeição." });
+  }
+});
+
+// Rota para obter os macronutrientes totais do dia
+router.get('/totais-dia', async (req, res) => {
+    const categorias = ["cafe", "almoco", "jantar"];
+    let alimentosDia = [];
+
+    try {
+        for (const categoria of categorias) {
+            const [refeicoes] = await pool.query(
+                `SELECT id FROM refeicoes WHERE LOWER(nome) = LOWER(?)`,
+                [categoria]
+            );
+
+            for (const ref of refeicoes) {
+                const [alimentos] = await pool.query(
+                    `SELECT 
+                        descricao AS nome_alimento,
+                        quantidade,
+                        energia AS calorias,
+                        proteina,
+                        lipidio,
+                        carboidrato
+                     FROM refeicao_alimentos
+                     WHERE refeicao_id = ?`,
+                    [ref.id]
+                );
+
+                alimentosDia = alimentosDia.concat(alimentos);
+            }
+        }
+
+        let totalProteina = 0;
+        let totalCarbo = 0;
+        let totalGordura = 0;
+        let totalKcal = 0;
+
+        alimentosDia.forEach(a => {
+            totalProteina += Number(a.proteina || 0);
+            totalCarbo += Number(a.carboidrato || 0);
+            totalGordura += Number(a.lipidio || 0);
+            totalKcal += Number(a.calorias || 0);
+        });
+
+        res.json({
+            totalProteina,
+            totalCarbo,
+            totalGordura,
+            totalKcal
+        });
+
+    } catch (err) {
+        console.error("Erro ao calcular totais do dia:", err);
+        res.status(500).json({ erro: "Erro ao calcular totais" });
+    }
+});
+
+
+
+// Rota para criar os alimentos
 router.post('/adicionar', async (req, res) => {
     const {
         descricao_do_alimento,

@@ -6,17 +6,43 @@
 
 /** color and transitions variables **/
 :root {
-    --color-container: #D9D9D9;
-    --color-black: #000000;
-    --color-white: #ffffff;
-    --color-button-transition: rgb(0, 0, 0);
-    --color-button: #9bca9f;
-    --color-link: #808080;
+    --color-container: #d9d9d9;
+    --color-background: #ffffff;
+    --color-items: black;
+    --color-waterbar: #ffffff;
+}
+html.dark-mode {
+    --color-background: rgb(10, 10, 10);
+    --color-container: rgb(30, 30, 30);
+    --color-items: white;
+    --color-items-test: grey;
+    --color-waterbar: #e5e7eb;
 }
 
-body{
+body {
+    background-color: var(--color-background);
+    color: var(--color-items);
     font-family: "Inter", sans-serif;
-    height: 100vh;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    transition: background-color 0.01s ease;
+}
+
+main {
+    padding: 20px;
+    color: var(--color-items);
+}
+main > button {
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    padding: 15px;
+    margin-bottom: 50px;
+    background-color: var(--color-container);
+    color: var(--color-items);
+    font-size: 16px;
 }
 
 p{
@@ -36,7 +62,7 @@ p{
 
 /** First section **/
 .main-info{
-    background-color: var(--color-white);
+    background-color: var(--color-container);
     width: 1200px;
     height: 500px;
     border-radius: 40px;
@@ -64,7 +90,7 @@ p{
     position: absolute;
     width: 190px;
     height: 190px;
-    background: var(--color-white);
+    background: var(--color-container);
     border-radius: 50%;
     transition: all 300ms;
 }
@@ -93,47 +119,79 @@ p{
     height: auto;
 }
 
-/** Register searchbar **/
-#searchbar{
-    background-color: var(--color-white);
-    width: 1200px;
-    height: 75px;
-    padding: 10px;
-    border-style: none;
-    border-radius: 50px;
+/** Sequence and goal section **/
+.sequence-goal{
+    display: flex;
+    gap: 50px;
+}
+
+/* Sequence */
+.sequence-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sequence{
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    gap: 10px;
+    background-color: #D9D9D9;
+    padding: 10px;
+    border-radius: 100px;
+    max-width: 550px;
+    width: 100%;
+    height: 100px;
 }
 
-#searchbar::placeholder{
-    font-size: 20px;
-    margin: 0px;
-    border: 0px;
-    padding-left: 20px;
+#day{
+    display: flex;
+    background-color: white;
+    border-radius: 50%;
+    padding: 30px;
+}
+
+/** Goal **/
+.goal-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.goal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #D9D9D9;
+    border-radius: 50px;
+    max-width: 650px;
+    width: 700%;
+    height: 100px;
 }
 
 /** Water bar **/
 .water-section{
-    background-color: var(--color-white);
-    width: 1200px;
-    height: 180px;
-    border-style: none;
-    border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background-color: var(--color-container);
+    width: 1200px;
+    height: 180px;
+    border-style: none;
+    border-radius: 50px;
 }
 
 .water-section-info{
-    width: 100%;
-    height: 100%;
-    margin-left: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    margin-left: 50px;
+    color: var(--color-items-test);
 }
 
 .waterProgressbar{
@@ -141,7 +199,7 @@ p{
     max-width: 600px;
     height: 10%;
     border-radius: 50px;
-    background-color: var(--color-container);
+    background-color: var(--color-waterbar);
 }
 
 .waterProgressbar div{
@@ -152,29 +210,111 @@ p{
     background-color: #5FCDD9;
     transition: all 300ms;
 }
-.sugestoes-lista {
+
+/** Side bar **/
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-container);
+    height: 100dvh;
+    position: relative;
+    justify-content: space-between;
+    min-width: 80px;
+    transition: 0.4s ease;
+}
+#sidebar-content {
+    padding: 15px;
+}
+
+#sidebar-content-config {
+    padding: 15px;
+    margin-top: auto;
+}
+
+.sidebar-items {
     list-style: none;
-    padding: 0;
-    margin: 0;
-    border: 1px solid #ccc;
-    max-height: 150px;
-    overflow-y: auto;
-    background: white;
-    position: absolute;
-    width: 100%;
-    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
 }
 
-.sugestoes-lista li {
-    padding: 5px;
+.item-description {
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    height: 0px;
+    transition: 0.4s ease;
+}
+
+#side-item-config {
     cursor: pointer;
+    border-radius: 8px;
+    padding: 15px;
 }
 
-.sugestoes-lista li:hover {
-    background-color: #f0f0f0;
+#side-item-config:hover{
+    background-color: var(--color-background);
 }
-.selecionados {
-    display: none; /* por padrão não aparece */
-    margin: 0;
-    padding: 0;
+
+.side-item {
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.side-item:hover {
+    background-color: var(--color-background);
+}
+
+.side-item a, #side-item-config a {
+    text-decoration: none;
+    display: flex;
+    color: var(--color-items);
+}
+
+/** Openbar **/
+#openbar-content {
+    display: flex;
+    justify-content: start;
+}
+
+#openbar-btn {
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    padding: 15px;
+    margin-bottom: 50px;
+    background-color: var(--color-container);
+    font-size: 16px;
+}
+
+#openbar-btn i{
+color: var(--color-items)
+}
+
+#openbar-btn:hover {
+    background-color: var(--color-background);
+}
+
+/** Toggle-Sidebar **/
+#sidebar.open-sidebar {
+    min-width: 100px;
+}
+
+#sidebar.open-sidebar .item-description {
+    width: 100px;
+    height: auto;
+}
+
+#sidebar.open-sidebar .side-item a {
+    gap: 13px;
+    justify-content: center;
+}
+
+#sidebar.open-sidebar #side-item-config a {
+    gap: 13px;
+    justify-content: center;
 }

@@ -33,7 +33,7 @@ services:
       - app_network
 
   db:
-    image: mysql:8.0
+    image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: breakappdb

@@ -10,8 +10,8 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="/css/homepage.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
     <title>BreakApp</title>
 </head>
 
@@ -19,14 +19,14 @@
     <!-- Sidebar -->
     <nav id="sidebar">
         <div id="sidebar-content">
-            <div id="openbar">
+            <div id="openbar-content">
                 <button id="openbar-btn">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
             <ul class="sidebar-items">
                 <li class="side-item">
-                    <a href="#">
+                    <a href="/dieta">
                         <i class="fa-solid fa-utensils"></i>
                         <span class="item-description">
                             Dieta
@@ -35,7 +35,7 @@
                 </li>
 
                 <li class="side-item">
-                    <a href="#">
+                    <a href="/alimentos">
                         <i class="fa-solid fa-id-card"></i>
                         <span class="item-description">
                             Alimentos
@@ -44,7 +44,7 @@
                 </li>
 
                 <li class="side-item">
-                    <a href="#">
+                    <a href="http://localhost:5173">
                         <i class="fa-solid fa-comment"></i>
                         <span class="item-description">
                             NutrIA
@@ -62,6 +62,7 @@
                 </li>
             </ul>
         </div>
+
         <div id="sidebar-content-config">
             <ul class="sidebar-items">
                 <li id="side-item-config">
@@ -78,6 +79,7 @@
 
     <main>
         <h1>BreakApp</h1>
+        <button id="dark-mode">Modo Escuro</button>
     </main>
 
     <!-- Homepage -->
@@ -92,27 +94,40 @@
                 <div class="insertProgress"><input type="number" oninput="changeCircleProgress()" /></div>
             </div>
             <div class="chart-container">
+                <div class="doughnut-center-info">
+                    <p id="center-kcal">0 kcal</p>
+                    <p id="center-macros">P: 0g | C: 0g | G: 0g</p>
+                </div>
                 <canvas id="doughnut" width="300" height="300"></canvas>
             </div>
+
         </div>
 
-        <div class="searchbar">
-            <input type="text" id="searchbar" placeholder="Adicionar novo registro">
-            <ul id="sugestoes" class="sugestoes-lista"></ul>
-            <div class="input-group">
-                <input type="number" id="quantidade" placeholder="Quantidade (g)" min="1">
-                <button type="button" id="btn-adicionar-alimento">Adicionar Registro</button>
+        <div class="sequence-goal">
+            <div class="sequence-container">
+                <h2>Ofensiva</h2>
+                <div class="sequence">
+                    <div id="day"></div>
+                    <div id="day"></div>
+                    <div id="day"></div>
+                    <div id="day"></div>
+                    <div id="day"></div>
+                    <div id="day"></div>
+                    <div id="day"></div>
+                </div>
+            </div>
+
+            <div class="goal-container">
+                <h2>Sua meta é</h2>
+                <div class="goal">
+                    <p>(a meta aqui)</p>
+                </div>
             </div>
         </div>
-
-        <div class="selecionados" id="selecionados"></div>
-        <p id="mensagem-status"></p>
-
-
 
         <div class="water-section">
             <div class="water-section-info">
-                <p>Água</p>
+                <h2>Medidor de água</h2>
                 <div class="waterProgressbar">
                     <div></div>
                 </div>
@@ -124,12 +139,13 @@
     </div>
 
     <!-- Scripts -->
-    <script src="../scripts/sidebar.js"></script>
-    <script src="../scripts/circular-progressbar.js"></script>
+    <script src="/scripts/sidebar.js"></script>
+    <script src="/scripts/homepage.js"></script>
+    <script src="/scripts/circular-progressbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
-    <script src="../scripts/chart.js"></script>
-    <script src="../scripts/water-progressbar.js"></script>
-    <script src="../scripts/alimentos.js"></script>
+    <script src="/scripts/chart.js"></script>
+    <script src="/scripts/water-progressbar.js"></script>
+    <script src="/scripts/dark-mode.js"></script>
 </body>
 
 </html>

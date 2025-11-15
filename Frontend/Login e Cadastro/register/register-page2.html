@@ -23,11 +23,11 @@
             <div class="container-together">
                 <div class="container-input">
                     <p>Peso:</p>
-                    <input id="peso(kg)" type="number" class="input-box" min="0" />
+                    <input id="peso" type="number" class="input-box" min="0" autocomplete="off" />
                 </div>
                 <div class="container-input">
                     <p>Altura:</p>
-                    <input id="altura(cm)" type="number" class="input-box" min="0" />
+                    <input id="altura" type="number" class="input-box" min="0" autocomplete="off" />
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
 
             <div class="container-input">
                 <p>Idade:</p>
-                <input id="idade" type="number" min="0" max="120" class="input-box" />
+                <input id="idade" type="number" min="0" max="120" class="input-box" autocomplete="off" />
             </div>
 
             <button type="button" class="button-next" id="btnNext">Próximo</button>
@@ -50,6 +50,11 @@
             <a href="/login" class="a-register">Ir para login</a>
         </div>
     </div>
+
+    <div id="popup-msg" class="popup-msg">
+  <div class="popup-content" id="popup-text"></div>
+</div>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -124,6 +129,18 @@
                 }
             });
         });
+        function mostrarMensagem(texto) {
+  const popup = document.getElementById("popup-msg");
+  const content = document.getElementById("popup-text");
+
+  content.textContent = texto;
+  popup.classList.add("open");
+
+  setTimeout(() => {
+    popup.classList.remove("open");
+  }, 1500);
+}
+
     </script>
 </body>
 

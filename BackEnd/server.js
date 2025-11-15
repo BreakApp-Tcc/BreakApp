@@ -30,6 +30,8 @@ app.get('/', (req, res) => {
 app.use(express.static(path.join(__dirname, '../Frontend')));
 app.use(express.static(path.join(__dirname, '../Frontend/refeicao')));
 app.use(express.static(path.join(__dirname, '../Frontend/homepage')));
+app.use(express.static(path.join(__dirname, '../Frontend/alimentos')));
+app.use(express.static(path.join(__dirname, '../Frontend/dieta')));
 app.use(express.static(path.join(__dirname, '../Frontend/Login e Cadastro'), {
     setHeaders: (res, path) => {
         if (path.endsWith('.html')) res.setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -53,10 +55,15 @@ app.get('/register-page2', (req, res) => {
     res.sendFile(path.join(__dirname, '../Frontend/Login e Cadastro/register/register-page2.html'));
 });
 
-// Rota pagina refeiçõs
-app.get('/refeicoes', (req, res) => {
+// Rota pagina alimentos
+app.get('/alimentos', (req, res) => {
     res.type('html');
-    res.sendFile(path.join(__dirname, '../Frontend/refeicao/refeicao.html'));
+    res.sendFile(path.join(__dirname, '../Frontend/alimentos/html/alimentos.html'));
+});
+// Rota pagina dieta/perfil
+app.get('/dieta', (req, res) => {
+    res.type('html');
+    res.sendFile(path.join(__dirname, '../Frontend/dieta/html/dieta.html'));
 });
 // Rota homepage
 app.get('/homepage', (req, res) => {
