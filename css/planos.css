@@ -6,7 +6,7 @@
 
 /** color and variables **/
 :root {
-    --color-container: #d9d9d9;
+    --color-container: #D9D9D9;
     --color-background: #ffffff;
     --color-items: black;
 }
@@ -58,11 +58,12 @@ body {
 }
 .card{
     width: 300px;
-    height: auto;
+    min-height: 632px;
     padding: 10px;
     text-align: center;
     border-radius: 15px;
-    border: solid black;
+    border: none;
+    box-shadow: 3px 3px 5px -1px black;
     transition: transform 0.3s;
     background-color: var(--color-container);
     color: var(--color-items);
@@ -72,7 +73,7 @@ body {
 }
 .card-name{
     margin-top: 10px;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
     padding-bottom: 35px;
 }
 .card-name > p{
@@ -94,7 +95,7 @@ body {
 .card-content > button{
     width: 120px;
     padding: 10px 20px;
-    background-color: var(--color-background);
+    background-color:  #9BCA9F;
     border-radius: 20px;
     margin-bottom: 10px;
     text-align: center;
