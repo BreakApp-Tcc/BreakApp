@@ -28,24 +28,6 @@ body {
     transition: background-color 0.01s ease;
 }
 
-/** All items **/
-#page{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 900px;
-    width: 100%;
-    margin: 0 auto;
-    margin-top: 30px;
-    padding: 20px;
-    box-sizing: border-box;
-    min-height: 100vh;
-    margin-left: 180px;
-    transition: margin-left 0.4s ease;
-}
-
 .container{
     width: 1100px;
     height: 100%;
@@ -73,7 +55,7 @@ body {
 }
 .card-name{
     margin-top: 10px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--color-items);
     padding-bottom: 35px;
 }
 .card-name > p{
@@ -83,13 +65,14 @@ body {
     padding: 10px 30px;
     padding-bottom: 20px;
     cursor: default;
-
 }
 .card-content > ul, li{
     list-style: none;
     padding: 10px 0;
 }
-.card-content > ul, li, i{
+.card-content ul, 
+.card-content li, 
+.card-content i{
     margin-right: 10px;
 }
 .card-content > button{
