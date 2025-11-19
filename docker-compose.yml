@@ -4,6 +4,7 @@ services:
     build:
       context: ./BackEnd
       dockerfile: Dockerfile
+    image: breakapp-node_app:latest   
     ports:
       - "3000:3000"
     depends_on:
@@ -18,6 +19,7 @@ services:
     build:
       context: ./backend-java
       dockerfile: Dockerfile.backend-java
+    image: breakapp-backend_java:latest   
     container_name: breakapp-java
     ports:
       - "8080:8080"

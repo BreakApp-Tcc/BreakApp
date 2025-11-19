@@ -254,7 +254,9 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         const resp = await fetch("/api/alimentos/salvar-refeicao", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json; charset=UTF-8"  // FIX: Added charset
+          },
           body: JSON.stringify(payload)
         });
         const json = await resp.json();
@@ -338,7 +340,9 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         const resp = await fetch("/api/alimentos/adicionar", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json; charset=UTF-8"  // FIX: Added charset
+          },
           body: JSON.stringify(payload)
         });
         const json = await resp.json();

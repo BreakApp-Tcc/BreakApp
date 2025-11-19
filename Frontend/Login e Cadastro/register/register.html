@@ -109,19 +109,86 @@
         <div class="popup-content" id="popup-text"></div>
     </div>
 
-    <script>
-        function mostrarMensagem(texto) {
-        const popup = document.getElementById("popup-msg");
-        const content = document.getElementById("popup-text");
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const sexoButtons = document.querySelectorAll(".container-buttons button");
+    const sexoInput = { value: "" };
 
-        content.textContent = texto;
-        popup.classList.add("open");
+    sexoButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            sexoButtons.forEach(btn => btn.classList.remove("selected"));
+            button.classList.add("selected");
+            sexoInput.value = button.id;
+        });
+    });
 
-        setTimeout(() => {
-            popup.classList.remove("open");
-        }, 1500);
-    }
-    </script>
+    const btnNext = document.getElementById("btnNext");
+
+    if (btnNext) {
+        btnNext.addEventListener("click", async () => {
+            const idade = parseInt(document.getElementById("idade").value, 10);
+            const peso = parseFloat(document.getElementById("peso").value);
+            const altura = parseFloat(document.getElementById("altura").value);
+            const sexo = sexoInput.value;
+
+            if (!sexo) {
+                mostrarMensagem("Selecione o sexo antes de continuar.");
+                return;
+            }
+
+            if (isNaN(idade) || isNaN(peso) || isNaN(altura)) {
+                mostrarMensagem("Preencha todos os campos corretamente.");
+                return;
+            }
+
+            const userData = {
+                nome_usuario: localStorage.getItem("nome_usuario"),
+                idade: idade,
+                peso: peso,
+                altura: altura,
+                sexo: sexo
+            };
+
+            try {
+                const response = await fetch('/api/user/calcular', {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    mostrarMensagem("Cadastro finalizado!");
+                    setTimeout(() => {
+                        window.location.href = "/login";
+                    }, 1500);
+                } else {
+                    mostrarMensagem("Erro ao calcular: " + (data.erro || "Erro desconhecido"));
+                }
+            } catch (error) {
+                mostrarMensagem("Erro de conexão: " + error.message);
+            }
+        });
+    } // ← FECHAMENTO DO if(btnNext)
+
+}); // ← FECHAMENTO DO DOMContentLoaded
+
+function mostrarMensagem(texto) {
+    const popup = document.getElementById("popup-msg");
+    const content = document.getElementById("popup-text");
+
+    content.textContent = texto;
+    popup.classList.add("open");
+
+    setTimeout(() => {
+        popup.classList.remove("open");
+    }, 1500);
+}
+</script>
+
+
 </body>
 
 </html>

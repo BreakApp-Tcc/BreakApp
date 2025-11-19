@@ -21,9 +21,9 @@ app.use('/api/user', userRoutes);
 app.use('/api/alimentos', alimentosRoutes);
 
 
-// Apenas redirecionando a raiz para /login
+// Apenas redirecionando a raiz para /landing-page
 app.get('/', (req, res) => {
-    res.redirect('/login');
+    res.redirect('/landing-page');
 });
 
 // Configuração da pasta estática
@@ -32,6 +32,8 @@ app.use(express.static(path.join(__dirname, '../Frontend/refeicao')));
 app.use(express.static(path.join(__dirname, '../Frontend/homepage')));
 app.use(express.static(path.join(__dirname, '../Frontend/alimentos')));
 app.use(express.static(path.join(__dirname, '../Frontend/dieta')));
+app.use(express.static(path.join(__dirname, '../Frontend/planos')));
+app.use(express.static(path.join(__dirname, '../Frontend/landing-page')));
 app.use(express.static(path.join(__dirname, '../Frontend/Login e Cadastro'), {
     setHeaders: (res, path) => {
         if (path.endsWith('.html')) res.setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -70,6 +72,22 @@ app.get('/homepage', (req, res) => {
     res.type('html');
     res.sendFile(path.join(__dirname, '../Frontend/homepage/html/homepage.html'));
 });
+// Rota planos
+app.get('/planos', (req, res) => {
+    res.type('html');
+    res.sendFile(path.join(__dirname, '../Frontend/planos/html/planos.html'));
+});
+// Rota landing-page
+app.get('/landing-page', (req, res) => {
+    res.type('html');
+    res.sendFile(path.join(__dirname, '../Frontend/landing-page/html/landingpage.html'));
+});
+// Rota about da landing-page
+app.get('/about', (req, res) => {
+    res.type('html');
+    res.sendFile(path.join(__dirname, '../Frontend/landing-page/html/about.html'));
+});
+
 
 
 // Rodando o servidor

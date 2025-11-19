@@ -215,8 +215,6 @@ router.get('/totais-dia', async (req, res) => {
     }
 });
 
-
-
 // Rota para criar os alimentos
 router.post('/adicionar', async (req, res) => {
     const {

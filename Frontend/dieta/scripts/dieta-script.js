@@ -41,6 +41,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function carregarUsuario() {
     try {
       const nomeUsuario = localStorage.getItem("nome_usuario");
+const ultimoUsuario = localStorage.getItem("ultimo_usuario");
+
+if (ultimoUsuario !== nomeUsuario) {
+  localStorage.removeItem("foto_perfil");
+  localStorage.setItem("ultimo_usuario", nomeUsuario);
+  profileImage.src = "";
+  profileImage.style.display = "none";
+}
+
       if (!nomeUsuario) throw new Error("Usuário não definido");
 
       const response = await fetch(`/api/user?nome=${encodeURIComponent(nomeUsuario)}`);
@@ -110,7 +119,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   botoes.forEach(btn => {
     btn.addEventListener("click", async () => {
       const tipo = btn.getAttribute("data-tipo");
-      console.log(`🍽️ Clicou em ${tipo}`);
+      console.log(` Clicou em ${tipo}`);
 
       const mapa = {
         cafe: "Café da manhã",

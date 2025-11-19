@@ -91,7 +91,6 @@ router.post('/cadastrar', (req, res) => {
 
 // Rota login
 router.post('/login', (req, res) => {
-    // Captura dados para requisição
     //identificador = email e nome
     let { identificador, senha } = req.body;
 
@@ -145,10 +144,8 @@ router.post('/calcular', (req, res) => {
         return res.status(400).json({ erro: "Todos os campos são obrigatórios." });
     }
 
-    // Calculando IMC (altura em cm)
     const imc = peso / ((altura / 100) ** 2);
 
-    // Calculando TMB (altura já em cm)
     const tmb = 10 * peso + 6.25 * altura - 5 * idade + (sexo === "masculino" ? 5 : -161);
 
     const sql = `
