@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&family=Noto+Sans:wght@100;400;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/homepage.css">
+  <link rel="stylesheet" href="../../sidebar/css/sidebar.css">
+
+  <title>BreakApp</title>
+</head>
+
+<body>
+<!-- Sidebar -->
+ <nav id="sidebar">
+    <div id="sidebar-content">
+      <div id="openbar">
+        <button id="openbar-btn">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+      <ul class="sidebar-items">
+        <li class="side-item">
+          <a href="/homepage">
+            <i class="fa-solid fa-house nav-icon"></i>
+            <span class="item-description">Tela Inicial</span>
+          </a>
+        </li>
+        <li class="side-item">
+          <a href="/dieta">
+            <i class="fa-solid fa-utensils"></i>
+            <span class="item-description">Dieta</span>
+          </a>
+        </li>
+        <li class="side-item">
+          <a href="/alimentos">
+            <i class="fa-solid fa-apple-whole"></i>
+            <span class="item-description">Alimentos</span>
+          </a>
+        </li>
+        <li class="side-item">
+          <a href="http://localhost:5173">
+            <i class="fa-solid fa-comment"></i>
+            <span class="item-description">NutrIA</span>
+          </a>
+        </li>
+        <li class="side-item">
+          <a href="/planos">
+            <i class="fa-regular fa-pen-to-square"></i>
+            <span class="item-description">Planos</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id="sidebar-content-config">
+        <ul class="sidebar-items">
+          <li id="side-item-config">
+            <button id="open-config">
+                            <a href="#">
+                                <i class="fa-solid fa-gear"></i>
+                                <span class="item-description">
+                                    Configurações
+                                </span>
+                            </a>
+              </button>
+          </li>
+        </ul>
+      </div>
+    </nav> 
+  <!-- PAINEL PRINCIPAL -->
+  <div class="container">
+    <div class="main-info">
+      <!-- CÍRCULO DE META -->
+      <div class="meta-circle">
+        <div class="progressCircle" id="progressCircle">
+          <span id="percent-value">0%</span>
+        </div>
+      </div>
+
+      <!-- DOUGHNUT DE MACROS -->
+      <div class="chart-container">
+        <canvas id="doughnut"></canvas>
+        <div class="chart-center">
+          <p id="center-kcal">0 kcal</p>
+          <p id="center-macros">P: 0g | C: 0g | G: 0g</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- META DIÁRIA -->
+    <div class="goal-container">
+      <div class="goal">
+        <p class="meta-text">Meta diária</p>
+        <p id="meta-kcal"></p>
+      </div>
+    </div>
+
+    <!-- ÁGUA -->
+    <div class="water-section">
+      <div class="water-section-info">
+        <h2>Medidor de água</h2>
+        <p id="water-goal-text">Meta diária: -- ml</p>
+        <div class="waterProgressbar">
+          <div id="water-bar">
+            <span id="water-bar-text">0 ml (0%)</span>
+          </div>
+        </div>
+        <div class="water-inputs">
+          <label>Adicionar água ingerida (ml):</label>
+          <input type="number" id="add-water" placeholder="Ex: 250" min="1">
+          <button id="registrar-water">Registrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../sidebar/script/sidebar.js"></script>
+  <script src="/scripts/circular-progressbar.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+  <script src="/scripts/homepage.js"></script>
+  <script src="/scripts/water-progressbar.js"></script>
+  <script src="/scripts/dark-mode.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,331 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/** color and transitions variables **/
+
+:root {
+    --color-container: #9bca9f;
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-button-transition: rgb(0, 0, 0);
+    --color-button: #9bca9f;
+    --color-link: #808080;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/** header **/
+
+header {
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+
+
+/** login section **/
+
+.wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background-color: var(--color-container);
+    border-radius: 30px;
+    width: 100%;
+    max-width: 700px;
+    min-height: 440px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+    overflow: hidden;
+}
+
+.container-together {
+    display: flex;
+    gap: 45px;
+    justify-content: center;
+    align-items: center;
+    /* Alinha verticalmente ao centro */
+    width: 100%;
+}
+
+.container-input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 450px;
+    align-self: center;
+    align-items: center;
+    /* Centraliza texto e inputs */
+    text-align: center;
+}
+
+.container-together .container-input {
+    width: auto;
+    max-width: none;
+    align-items: center;
+    /* Centraliza também no container-together */
+    text-align: center;
+}
+
+.container-together .input-box {
+    width: 200px;
+}
+
+.container p {
+    font-size: 16px;
+    /* Centraliza o texto dos <p> */
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.input-box,
+.birth-date {
+    border: none;
+    background-color: var(--color-white);
+    width: 100%;
+    max-width: 450px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    text-align: center;
+    /* centraliza o texto dentro do input */
+}
+
+.sex-button-masc,
+.sex-button-fem {
+    flex: 1;
+    font-size: 16px;
+    padding: 12px 0;
+    border: none;
+    background-color: var(--color-white);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    user-select: none;
+}
+
+.sex-button-masc {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.sex-button-masc:hover,
+.sex-button-fem:hover {
+    transform: scale(1.05);
+}
+
+.sex-button-fem {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.container-buttons {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 450px;
+    justify-content: center;
+    /* centraliza os botões */
+    align-items: center;
+    /* alinha verticalmente os botões */
+    align-self: center;
+}
+
+.birth-date {
+    border-style: none;
+    border-radius: 8px;
+    width: 450px;
+    height: 30px;
+    text-align: center;
+}
+
+.button-next {
+    border-style: solid;
+    width: 100%;
+    max-width: 450px;
+    height: 46px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--color-button);
+    color: var(--color-black);
+    align-self: center;
+    cursor: pointer;
+    transition: left 0.6s ease;
+    font-weight: bold;
+    font-size: 16px;
+    position: relative;
+    left: 0;
+}
+
+.button-next:hover {
+    background-color: var(--color-button-transition);
+    color: var(--color-white);
+    border-style: solid;
+    left: 10px;
+}
+
+
+/** Estilo de botão selecionado com animação suave **/
+
+.selected {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+    text-decoration: none;
+    margin: 0;
+    color: var(--color-link);
+}
+
+a:hover {
+    color: var(--color-black);
+    transition-duration: 0.5s;
+}
+
+.a-register {
+    text-align: center;
+    color: var(--color-link);
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 5px;
+}
+.popup-msg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.25s ease;
+  z-index: 9999;
+}
+
+.popup-msg.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.popup-msg .popup-content {
+  width: 320px;
+  max-width: 90%;
+  padding: 25px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+/* Fundo escurecido */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    backdrop-filter: blur(3px);
+}
+
+/* Caixa do popup */
+.popup-box {
+    width: 340px;
+    max-width: 90%;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.2);
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+/* Título */
+.popup-box h2 {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Texto */
+.popup-box p {
+    margin: 15px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Botões */
+.popup-box button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.2s ease-in-out;
+}
+
+/* Botão principal */
+.popup-confirm {
+    background: #5F92F8;
+    color: white;
+}
+
+.popup-confirm:hover {
+    background: #4a7bd6;
+}
+
+/* Botão secundário */
+.popup-cancel {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.popup-cancel:hover {
+    background: #cacaca;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,23 @@
+# Etapa 1: Build com Maven
+FROM maven:3.9.3-eclipse-temurin-20 AS build
+WORKDIR /app
+COPY pom.xml .
+RUN mvn dependency:go-offline
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# Etapa 2: Runtime leve
+FROM eclipse-temurin:20-jdk-alpine
+WORKDIR /app
+
+# Copia JAR
+COPY --from=build /app/target/*.jar app.jar
+
+# Porta do Spring Boot
+EXPOSE 8080
+
+# Variáveis opcionais
+ENV GEMINI_API_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent
+ENV GEMINI_API_KEY=AIzaSyDyjbosGjeHNd7EYyeR4WR6VT6VaPcX25Q
+
+ENTRYPOINT ["java","-jar","app.jar"]
