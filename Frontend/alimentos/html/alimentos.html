@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8" />
@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/css/alimentos.css">
     <link rel="stylesheet" href="../../sidebar/css/sidebar.css">
     <link rel="stylesheet" href="/css/popup-alimento.css">
+    <link rel="stylesheet" href="/css/popup-configurações.css">
+    
     <title>Alimentos</title>
 </head>
 
@@ -58,21 +60,45 @@
           </li>
         </ul>
       </div>
-      <div id="sidebar-content-config">
-        <ul class="sidebar-items">
-          <li id="side-item-config">
-            <button id="open-config">
+     <div id="sidebar-content-config">
+            <ul class="sidebar-items">
+                <li id="side-item-config">
+                        <button id="open-Modal-config">
                             <a href="#">
                                 <i class="fa-solid fa-gear"></i>
                                 <span class="item-description">
                                     Configurações
                                 </span>
                             </a>
-              </button>
-          </li>
-        </ul>
-      </div>
-    </nav> 
+                        </button>
+                </li>
+            </ul>
+        </div>
+  </nav>
+
+
+    <main>
+        <h1>BreakApp</h1>
+    </main>
+
+  
+    <!-- MODAL CONFIGURAÇÕES -->
+    <div id="modal-config" class="modal-config">
+        <div class="modal-content-config">
+            <div class="modal-title-config">
+                <span id="close-Modal-config" class="close">&times;</span>
+                <h1>Configurações</h1>
+            </div>
+
+            <div class="modal-header-config">
+                <ul>
+                    <li id="button-darkmode">
+                        <button id="dark-mode">Modo Escuro</button>
+                    </li>
+            </div>
+        </div>
+    </div>
+
 
     <div id="page">
         <!-- Searchbar -->
@@ -181,26 +207,11 @@
         <div class="popup-conteudo"> Alimento criado com sucesso!</div>
     </div>
 
-        <!-- Modal -->
-    <div id="modal-config" class="modal-config">
-        <div class="modal-content-config">
-            <div class="modal-title-config">
-                <span id="close-Modal-config" class="close-config">&times;</span>
-                <h1>Configurações</h1>
-            </div>
 
-            <div class="modal-header-config">
-                <ul>
-                    <li id="button-darkmode">
-                        <button id="dark-mode">Modo Escuro</button>
-                    </li>
-            </div>
-        </div>
-    </div>
-  
     <!-- Scripts -->
     <script src="../../sidebar/script/sidebar.js"></script>
     <script src="/scripts/popup-alimento.js"></script>
+    <script script src="/scripts/popup-configurações.js"></script>
     <script src="/scripts/dark-mode.js"></script>
     <script src="/scripts/script.js"></script>
     <script src="../scripts/configurações.js"></script>

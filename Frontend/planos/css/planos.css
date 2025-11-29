@@ -35,6 +35,11 @@ body:has(#sidebar.open-sidebar) .container {
     margin-left: 400px;
 }
 
+main {
+    padding: 20px;
+    cursor: default;
+}
+
 .container{
     width: 1100px;
     height: 100%;

@@ -7,13 +7,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&family=Noto+Sans:wght@100;400;700&display=swap"
-    rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&family=Noto+Sans:wght@100;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="/css/homepage.css">
   <link rel="stylesheet" href="../../sidebar/css/sidebar.css">
+  <link rel="stylesheet" href="/css/popup-configurações.css">
 
   <title>BreakApp</title>
 </head>
@@ -61,20 +59,42 @@
       </ul>
     </div>
     <div id="sidebar-content-config">
-        <ul class="sidebar-items">
-          <li id="side-item-config">
-            <button id="open-config">
+            <ul class="sidebar-items">
+                <li id="side-item-config">
+                        <button id="open-Modal-config">
                             <a href="#">
                                 <i class="fa-solid fa-gear"></i>
                                 <span class="item-description">
                                     Configurações
                                 </span>
                             </a>
-              </button>
-          </li>
-        </ul>
-      </div>
-    </nav> 
+                        </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <Main>
+      <h1>BreakApp</h1>
+    </Main>
+
+    <!-- MODAL CONFIGURAÇÕES -->
+    <div id="modal-config" class="modal-config">
+        <div class="modal-content-config">
+            <div class="modal-title-config">
+                <span id="close-Modal-config" class="close">&times;</span>
+                <h1>Configurações</h1>
+            </div>
+
+            <div class="modal-header-config">
+                <ul>
+                    <li id="button-darkmode">
+                        <button id="dark-mode">Modo Escuro</button>
+                    </li>
+            </div>
+        </div>
+    </div>
+
   <!-- PAINEL PRINCIPAL -->
   <div class="container">
     <div class="main-info">
@@ -128,8 +148,9 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
   <script src="/scripts/homepage.js"></script>
   <script src="/scripts/water-progressbar.js"></script>
+  <script src="/scripts/popup-configurações.js"></script>
   <script src="/scripts/dark-mode.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </body>
-
 </html>

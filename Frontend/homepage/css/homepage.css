@@ -32,6 +32,7 @@ html.dark-mode {
   --color-items-test: #808080;
   --color-waterbar: #e5e7eb;
   --color-shadow: rgba(0, 0, 0, 0.2);
+  --color-icon: #ffffff;
 }
 
 /* ====================================== */
@@ -49,27 +50,16 @@ body {
 
 main {
   padding: 20px;
+  color: var(--color-icon);
+  cursor: default;
+  margin-left: 80px;
+  transition: margin-left 0.4s ease;
   flex: 1;
+  width: 100%;
 }
 
-/* ====================================== */
-/* BOTÃO MODO ESCURO                      */
-/* ====================================== */
-
-main>button {
-  border: none;
-  cursor: pointer;
-  border-radius: 50px;
-  padding: 15px 20px;
-  margin-bottom: 50px;
-  background-color: var(--color-container);
-  color: var(--color-items);
-  font-size: 16px;
-  transition: all 0.2s ease;
-}
-
-main>button:hover {
-  opacity: 0.9;
+body:has(#sidebar.open-sidebar) main {
+  margin-left: 240px;
 }
 
 /* ====================================== */
@@ -87,10 +77,11 @@ main>button:hover {
   margin: 0 auto;
   margin-top: 30px;
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-right: 200px;
 }
 
 body:has(#sidebar.open-sidebar) .container {
-  margin-left: 280px;
+  margin-left: 240px;
 }
 
 /* ====================================== */
@@ -342,9 +333,9 @@ body:has(#sidebar.open-sidebar) .container {
 /* ====================================== */
 
 #sidebar {
-  display: flex;
+  display: fixed;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: var(--color-container);
   height: 100dvh;
   justify-content: space-between;
   min-width: 80px;
@@ -373,7 +364,7 @@ body:has(#sidebar.open-sidebar) .container {
   cursor: pointer;
   border-radius: 50px;
   padding: 15px;
-  background-color: #ffffff;
+  background-color: var(--color-container);
   font-size: 16px;
   transition: all 0.2s ease;
 }
@@ -537,55 +528,4 @@ body:has(#sidebar.open-sidebar) .container {
   .water-inputs input {
     width: 100%;
   }
-}
-
-#open-config {
-  border: none;
-  cursor: pointer;
-  background-color: var(--color-container);
-  font-size: 16px;
-}
-
-#button-darkmode>button {
-  border: none;
-  cursor: pointer;
-  border-radius: 30px;
-  padding: 15px;
-  background-color: var(--color-background);
-  color: var(--color-items);
-  font-size: 12px;
-}
-
-.modal-config {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content-config {
-  background: var(--color-container);
-  padding: 20px;
-  border-radius: 10px;
-  width: 350px;
-}
-
-.modal-title-config {
-  margin-bottom: 10px;
-  cursor: default;
-}
-
-.modal-header-config ul {
-  list-style: none;
-}
-
-.close-config {
-  font-size: 25px;
-  float: right;
-  cursor: pointer;
 }

@@ -32,7 +32,7 @@ html.dark-mode {
 }
 
 /* ====================================== */
-/* BODY & LAYOUT                          */
+/* BODY & LAYOUT, MAIN                    */
 /* ====================================== */
 
 body {
@@ -66,6 +66,11 @@ body {
 
 body:has(#sidebar.open-sidebar) #page {
     margin-left: 180px;
+}
+
+main {
+    padding: 20px;
+    cursor: default;
 }
 
 /* ====================================== */

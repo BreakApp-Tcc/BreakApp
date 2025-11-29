@@ -44,6 +44,11 @@ body {
   transition: background-color 0.3s ease;
 }
 
+main {
+    padding: 20px;
+    cursor: default;
+}
+
 h1 {
   font-size: 1.75rem;
   font-weight: 700;
