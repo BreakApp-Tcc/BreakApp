@@ -1,8 +1,12 @@
 :root {
-    --primary: #9BCA9F;   /* verde destaque */
-    --white: #FFFFFF;     /* fundo */
-    --black: #000000;     /* texto */
-    --gray: #D9D9D9;      /* sombra, bordas suaves */
+    --primary: #9BCA9F;
+    /* verde destaque */
+    --white: #FFFFFF;
+    /* fundo */
+    --black: #000000;
+    /* texto */
+    --gray: #D9D9D9;
+    /* sombra, bordas suaves */
 }
 
 /* Overlay (fundo escuro) */
@@ -24,8 +28,13 @@
 }
 
 @keyframes overlayFade {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* Modal */
@@ -33,7 +42,7 @@
     background: var(--white);
     border: 2px solid var(--gray);
     border-radius: 12px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 450px;
     padding: 1.5rem 2rem;
@@ -63,7 +72,7 @@
     font-weight: 700;
 }
 
-.modal-infos{
+.modal-infos {
     margin-left: 20px;
 }
 
@@ -75,7 +84,7 @@
     margin-bottom: 1.5rem;
 }
 
-.modal-textalign{
+.modal-textalign {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
@@ -98,7 +107,7 @@
     padding: 0.6rem 1rem;
     cursor: pointer;
     font-weight: 600;
-    transition: background 0.2s ease, transform 0.1s ease;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .modal-footer .btn-primary:hover {
@@ -118,7 +127,7 @@
     border-radius: 8px;
     padding: 0.5rem 0.9rem;
     cursor: pointer;
-    transition: background 0.2s ease, transform 0.1s ease;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .modal-footer .btn-secondary:hover {
@@ -159,5 +168,6 @@
 }
 
 .modal-header {
-    padding-right: 44px; /* espaço para o botão ✕ */
+    padding-right: 44px;
+    /* espaço para o botão ✕ */
 }

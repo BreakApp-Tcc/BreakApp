@@ -1,22 +1,24 @@
 /* MODAL CONFIGURAÇÕES */
 
-#open-Modal-config{
-    border: none;
-    cursor: pointer;
-    background-color: var(--color-container);
-    font-size: 16px;
+#open-Modal-config {
+  border: none;
+  cursor: pointer;
+  background-color: var(--color-container);
+  font-size: 16px;
 }
-#button-darkmode > button{
-    border: none;
-    cursor: pointer;
-    border-radius: 30px;
-    padding: 15px;
-    background-color: var(--color-background);
-    color: var(--color-items);
-    font-size: 12px;
+
+#button-darkmode>button {
+  border: none;
+  cursor: pointer;
+  border-radius: 30px;
+  padding: 15px;
+  background-color: var(--color-background);
+  color: var(--color-items);
+  font-size: 12px;
 }
-.modal-config{
-  display: none; 
+
+.modal-config {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -28,21 +30,23 @@
   z-index: 9999;
 }
 
-.modal-content-config{
+.modal-content-config {
   background: var(--color-container);
   padding: 20px;
   border-radius: 10px;
   width: 350px;
 }
-.modal-title-config{
-    margin-bottom: 10px;
-    cursor: default;
-}
-.modal-header-config ul{
-    list-style: none;
+
+.modal-title-config {
+  margin-bottom: 10px;
+  cursor: default;
 }
 
-.close{
+.modal-header-config ul {
+  list-style: none;
+}
+
+.close {
   font-size: 25px;
   float: right;
   cursor: pointer;

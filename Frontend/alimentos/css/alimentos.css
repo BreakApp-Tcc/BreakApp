@@ -24,6 +24,11 @@
     --color-shadow: rgba(0, 0, 0, 0.05);
 }
 
+html {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
 html.dark-mode {
     --color-background: rgb(10, 10, 10);
     --color-container: rgb(30, 30, 30);
@@ -42,35 +47,46 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0;
-    padding-top: 50px;
-    padding-left: 200px;
     display: flex;
     flex-direction: column;
     transition: background-color 0.1s ease;
+    overflow-x: hidden;
 }
 
-  #page {
+body>#page {
+    margin-left: 350px;
+    margin-top: 40px;
+    overflow-x: hidden;
+}
+
+#page {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     width: 100%;
     height: 100vh;
-    padding: 40px;
-    margin: 15px 450px 15px 450px;
-    overflow-x: hidden;
-    overflow-y: auto;
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+}
 
 
 body:has(#sidebar.open-sidebar) #page {
-    margin-left: 180px;
+    margin-left: 240px;
 }
 
 main {
     padding: 20px;
+    color: var(--color-icon);
     cursor: default;
+    transition: margin-left 0.4s ease;
+    flex: 1;
+    width: 100%;
+    font-size: 16px;
+    margin-left: 80px
+}
+
+body:has(#sidebar.open-sidebar) main {
+    margin-left: 240px;
 }
 
 /* ====================================== */
@@ -355,52 +371,4 @@ main {
     #add-alimento-btn {
         width: 100%;
     }
-}
-/* Modal */
-
-#open-config{
-    border: none;
-    cursor: pointer;
-    background-color: var(--color-container);
-    font-size: 16px;
-}
-#button-darkmode > button{
-    border: none;
-    cursor: pointer;
-    border-radius: 30px;
-    padding: 15px;
-    background-color: var(--color-background);
-    color: var(--color-items);
-    font-size: 12px;
-}
-.modal-config{
-  display: none; 
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content-config{
-  background: var(--color-container);
-  padding: 20px;
-  border-radius: 10px;
-  width: 350px;
-}
-.modal-title-config{
-    margin-bottom: 10px;
-    cursor: default;
-}
-.modal-header-config ul{
-    list-style: none;
-}
-
-.close-config{
-  font-size: 25px;
-  float: right;
-  cursor: pointer;
 }
