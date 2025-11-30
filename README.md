@@ -10,10 +10,10 @@ Desenvolvido por: Antonio Sousa, Fernando Batista, Gustavo Taschetti, Lucas Pere
 
 | Camada         | Tecnologia                              |
 | -------------- | --------------------------------------- |
-| Backend        | Node.js, Java/Spring (quando aplicável) |
+| Backend        | Node.js, Java/Spring |
 | Frontend       | HTML, CSS, JavaScript                   |
 | Execução       | Docker & Docker Compose                 |
-| Banco de Dados | MySQL/MariaDB via container             |
+| Banco de Dados | MySQL via container             |
 
 ---
 
