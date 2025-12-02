@@ -69,11 +69,6 @@ body>#page {
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
-body:has(#sidebar.open-sidebar) #page {
-    margin-left: 240px;
-}
-
 main {
     padding: 20px;
     color: var(--color-icon);
@@ -87,6 +82,9 @@ main {
 
 body:has(#sidebar.open-sidebar) main {
     margin-left: 240px;
+}
+body:has(#sidebar.open-sidebar) #page {
+    margin-left: 450px;
 }
 
 /* ====================================== */

@@ -118,12 +118,14 @@
       <h1>Progresso</h1>
       <div class="charts">
         <div class="chart-container">
+          <button class="info-btn" data-modal="imcModal">i</button>
           <div class="chart">
             <h2>IMC</h2>
             <p><strong>IMC:</strong> <span id="valor-imc">--</span></p>
           </div>
         </div>
         <div class="chart-container">
+          <button class="info-btn" data-modal="tmbModal">i</button>
           <div class="chart">
             <h2>TMB</h2>
             <p><strong>TMB:</strong> <span id="valor-tmb">--</span></p>
@@ -216,7 +218,61 @@
     </div>
   </div>
 
+  <!-- Modal IMC -->
+  <div class="overlay" id="imcModal">
+    <div class="modal">
+      <button class="close-btn" data-close>✕</button>
+
+      <div class="modal-header">
+        <div class="modal-title">O que é IMC?</div>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          O <strong>IMC</strong> (Índice de Massa Corporal) é uma medida usada para avaliar se o peso está
+          adequado em relação à altura.
+        </p>
+        <p>Fórmula:</p>
+        <p style="font-weight: bold; text-align:center;">
+          IMC = peso ÷ (altura × altura)
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary" data-close>Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal TMB -->
+  <div class="overlay" id="tmbModal">
+    <div class="modal">
+      <button class="close-btn" data-close>✕</button>
+
+      <div class="modal-header">
+        <div class="modal-title">O que é TMB?</div>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          A <strong>TMB</strong> (Taxa Metabólica Basal) é a quantidade de calorias que seu corpo precisa para
+          manter funções essenciais em repouso.
+        </p>
+        <p>
+          Ela varia segundo idade, peso, altura e sexo.
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary" data-close>Fechar</button>
+      </div>
+    </div>
+  </div>
+
+
+
   <script src="../../sidebar/script/sidebar.js"></script>
+  <script src="../../sidebar/script/sidebar-indicator.js"></script>
   <script src="/scripts/dieta-popup.js"></script>
   <script src="/scripts/dieta-script.js"></script>
   <script src="/scripts/popup-configurações.js"></script>

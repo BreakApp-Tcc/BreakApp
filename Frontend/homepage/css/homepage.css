@@ -109,6 +109,7 @@ body:has(#sidebar.open-sidebar) .container {
 
 .meta-circle {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex: 1;
@@ -146,6 +147,8 @@ body:has(#sidebar.open-sidebar) .container {
 /* ====================================== */
 
 .chart-container {
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 270px;
   height: 270px;
@@ -153,6 +156,9 @@ body:has(#sidebar.open-sidebar) .container {
   justify-content: center;
   align-items: center;
   flex: 1;
+}
+.chart-container h2{
+  padding-right: 130px;
 }
 
 .chart-center {
@@ -163,6 +169,7 @@ body:has(#sidebar.open-sidebar) .container {
   text-align: center;
   font-weight: 600;
   pointer-events: none;
+  margin-top: 20px;
 }
 
 #center-kcal {

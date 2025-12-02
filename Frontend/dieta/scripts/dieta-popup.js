@@ -42,3 +42,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Abrir o modal
+  document.querySelectorAll(".info-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const modalId = btn.dataset.modal;
+      const overlay = document.getElementById(modalId);
+
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+    });
+  });
+
+  // Fechar pelo botão ✕ ou "Fechar"
+  document.querySelectorAll("[data-close]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const overlay = btn.closest(".overlay");
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+    });
+  });
+
+  // Fechar clicando no fundo escurecido
+  document.querySelectorAll(".overlay").forEach((overlay) => {
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) {
+        overlay.classList.remove("open");
+        overlay.setAttribute("aria-hidden", "true");
+      }
+    });
+  });
+});
+
