@@ -19,16 +19,14 @@ const validarEmail = (email) => {
     return regex.test(email);
 };
 
-// ROTA CORRIGIDA - Retorna dados do usuário por nome ou por query param
+// ROTA GET - Retorna dados do usuário por nome ou por query param
 router.get('/', (req, res) => {
-    // Aceita tanto pela sessão quanto por query parameter
     const nome_usuario = req.query.nome || req.session.usuario;
     
     if (!nome_usuario) {
         return res.status(400).json({ erro: 'Usuário não informado' });
     }
 
-    // IMPORTANTE: Retornar também o ID do usuário
     pool.query(
         'SELECT id, nome_usuario AS nome, peso, altura, imc, tmb, idade, sexo, email FROM usuario WHERE nome_usuario = ?',
         [nome_usuario],
@@ -48,6 +46,84 @@ router.get('/', (req, res) => {
     );
 });
 
+// ROTA PUT - Atualizar dados do usuário
+router.put('/atualizar/:id', (req, res) => {
+    const { id } = req.params;
+    const { nome_usuario, peso, altura, imc, tmb } = req.body;
+
+    console.log("Recebendo atualização para usuário ID:", id);
+    console.log("Dados recebidos:", req.body);
+
+    if (!id) {
+        return res.status(400).json({ erro: 'ID do usuário é obrigatório' });
+    }
+
+    // Construir query dinamicamente baseado nos campos enviados
+    const campos = [];
+    const valores = [];
+
+    if (nome_usuario) {
+        campos.push('nome_usuario = ?');
+        valores.push(nome_usuario);
+    }
+    if (peso !== undefined && peso !== null) {
+        campos.push('peso = ?');
+        valores.push(peso);
+    }
+    if (altura !== undefined && altura !== null) {
+        campos.push('altura = ?');
+        valores.push(altura);
+    }
+    if (imc !== undefined && imc !== null) {
+        campos.push('imc = ?');
+        valores.push(imc);
+    }
+    if (tmb !== undefined && tmb !== null) {
+        campos.push('tmb = ?');
+        valores.push(tmb);
+    }
+
+    if (campos.length === 0) {
+        return res.status(400).json({ erro: 'Nenhum campo para atualizar' });
+    }
+
+    // Adicionar o ID no final dos valores
+    valores.push(id);
+
+    const sql = `UPDATE usuario SET ${campos.join(', ')} WHERE id = ?`;
+
+    console.log("Executando SQL:", sql);
+    console.log("Com valores:", valores);
+
+    pool.query(sql, valores, (err, result) => {
+        if (err) {
+            console.error("Erro ao atualizar usuário:", err);
+            return res.status(500).json({ erro: 'Erro ao atualizar dados' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ erro: 'Usuário não encontrado' });
+        }
+
+        // Buscar dados atualizados
+        pool.query(
+            'SELECT id, nome_usuario AS nome, peso, altura, imc, tmb, idade, sexo, email FROM usuario WHERE id = ?',
+            [id],
+            (err, results) => {
+                if (err) {
+                    console.error("Erro ao buscar usuário atualizado:", err);
+                    return res.status(500).json({ erro: 'Erro ao buscar dados atualizados' });
+                }
+
+                console.log("Usuário atualizado com sucesso:", results[0]);
+                res.json({
+                    mensagem: 'Dados atualizados com sucesso',
+                    usuario: results[0]
+                });
+            }
+        );
+    });
+});
 
 // Rota para cadastro
 router.post('/cadastrar', (req, res) => {
@@ -112,7 +188,6 @@ router.post('/cadastrar', (req, res) => {
         }
     );
 });
-
 
 // Rota login
 router.post('/login', (req, res) => {
@@ -181,7 +256,6 @@ router.post('/login', (req, res) => {
         });
     });
 });
-
 
 // Rota calcular IMC e TMB
 router.post('/calcular', (req, res) => {

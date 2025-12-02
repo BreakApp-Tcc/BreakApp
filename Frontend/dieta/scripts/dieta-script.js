@@ -19,6 +19,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   const tituloRefeicao = document.getElementById("tituloRefeicao");
   const conteudoRefeicao = document.getElementById("conteudoRefeicao");
 
+  // --- ELEMENTOS DO MODAL DE ATUALIZAÇÃO ---
+  const overlay = document.getElementById("overlay");
+  const openModalBtn = document.getElementById("openModal");
+  const closeBtn = document.getElementById("closeBtn");
+  const cancelBtn = document.getElementById("cancelBtn");
+  const confirmBtn = document.getElementById("confirmBtn");
+  const inputNome = document.getElementById("input-nome");
+  const inputPeso = document.getElementById("input-peso");
+  const inputAltura = document.getElementById("input-altura");
+
   function abrirPopupRefeicao(titulo, conteudo) {
     tituloRefeicao.textContent = titulo;
     conteudoRefeicao.innerHTML = conteudo;
@@ -33,8 +43,35 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (closeRefeicaoBtn) closeRefeicaoBtn.addEventListener("click", fecharPopupRefeicao);
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") fecharPopupRefeicao();
+    if (e.key === "Escape") {
+      fecharPopupRefeicao();
+      fecharModal();
+    }
   });
+
+  // --- FUNÇÕES DO MODAL DE ATUALIZAÇÃO ---
+  function abrirModal() {
+    if (usuario) {
+      inputNome.value = usuario.nome || "";
+      inputPeso.value = usuario.peso || "";
+      inputAltura.value = usuario.altura || "";
+    }
+    overlay.classList.add("open");
+    overlay.setAttribute("aria-hidden", "false");
+  }
+
+  function fecharModal() {
+    overlay.classList.remove("open");
+    overlay.setAttribute("aria-hidden", "true");
+    // Limpar campos
+    inputNome.value = "";
+    inputPeso.value = "";
+    inputAltura.value = "";
+  }
+
+  if (openModalBtn) openModalBtn.addEventListener("click", abrirModal);
+  if (closeBtn) closeBtn.addEventListener("click", fecharModal);
+  if (cancelBtn) cancelBtn.addEventListener("click", fecharModal);
 
   // --- CARREGAR USUÁRIO ---
   async function carregarUsuario() {
@@ -48,7 +85,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         throw new Error("Usuário não definido no localStorage");
       }
 
-      // Buscar dados do usuário
       const response = await fetch(`/api/user?nome=${encodeURIComponent(nomeUsuario)}`);
       if (!response.ok) {
         throw new Error(`Erro HTTP: ${response.status}`);
@@ -57,28 +93,152 @@ document.addEventListener("DOMContentLoaded", async () => {
       usuario = await response.json();
       console.log("Usuário carregado:", usuario);
 
-      // Garantir que temos o ID
       if (!usuario.id && usuarioId) {
         usuario.id = usuarioId;
       }
 
-      // Salvar o ID no localStorage
       localStorage.setItem("usuarioId", usuario.id);
 
-      // Atualizar interface
-      if (nomeElement) nomeElement.textContent = usuario.nome || nomeUsuario;
-      if (pesoElement) pesoElement.textContent = usuario.peso?.toFixed(1) || "-";
-      if (alturaElement) alturaElement.textContent = usuario.altura?.toFixed(2) || "-";
-      if (imcElement) imcElement.textContent = usuario.imc?.toFixed(2) || "-";
-      if (tmbElement) tmbElement.textContent = usuario.tmb?.toFixed(0) || "-";
-
-      // Carregar refeições
+      atualizarInterfaceUsuario();
       await carregarRefeicoes();
       
     } catch (err) {
       console.error("Erro ao carregar usuário:", err);
       alert("Erro ao carregar dados do usuário. Faça login novamente.");
     }
+  }
+
+  // --- ATUALIZAR INTERFACE DO USUÁRIO ---
+  function atualizarInterfaceUsuario() {
+    if (nomeElement) nomeElement.textContent = usuario.nome || "-";
+    if (pesoElement) pesoElement.textContent = usuario.peso ? usuario.peso.toFixed(1) : "-";
+    if (alturaElement) alturaElement.textContent = usuario.altura ? usuario.altura.toFixed(2) : "-";
+    if (imcElement) imcElement.textContent = usuario.imc ? usuario.imc.toFixed(2) : "-";
+    if (tmbElement) tmbElement.textContent = usuario.tmb ? usuario.tmb.toFixed(0) : "-";
+  }
+
+  // --- ATUALIZAR DADOS DO USUÁRIO ---
+ // --- ATUALIZAR DADOS DO USUÁRIO ---
+async function atualizarDadosUsuario() {
+  const novoNome = inputNome.value.trim();
+  const novoPeso = parseFloat(inputPeso.value);
+  const novaAltura = parseFloat(inputAltura.value);
+
+  // Validar se pelo menos um campo foi preenchido
+  if (!novoNome && !novoPeso && !novaAltura) {
+    alert("Preencha pelo menos um campo para atualizar.");
+    return;
+  }
+
+  // Validar valores numéricos
+  if (novoPeso && (novoPeso <= 0 || isNaN(novoPeso))) {
+    alert("Digite um peso válido.");
+    return;
+  }
+
+  if (novaAltura && (novaAltura <= 0 || isNaN(novaAltura))) {
+    alert("Digite uma altura válida.");
+    return;
+  }
+
+  try {
+    // Preparar dados para atualização (apenas campos preenchidos)
+    const dadosAtualizacao = {};
+    
+    if (novoNome) dadosAtualizacao.nome_usuario = novoNome;
+    if (novoPeso) dadosAtualizacao.peso = novoPeso;
+    if (novaAltura) dadosAtualizacao.altura = novaAltura;
+
+    // Adicionar dados necessários para recalcular IMC e TMB
+    dadosAtualizacao.idade = usuario.idade;
+    dadosAtualizacao.sexo = usuario.sexo;
+
+    // Se está atualizando peso ou altura, usar os novos valores ou os existentes
+    const pesoParaCalculo = novoPeso || usuario.peso;
+    const alturaParaCalculo = novaAltura || usuario.altura;
+
+    // Recalcular IMC e TMB
+    if (pesoParaCalculo && alturaParaCalculo) {
+      const imc = pesoParaCalculo / ((alturaParaCalculo / 100) ** 2);
+      const tmb = 10 * pesoParaCalculo + 6.25 * alturaParaCalculo - 5 * usuario.idade + 
+                  (usuario.sexo === "masculino" ? 5 : -161);
+      
+      dadosAtualizacao.imc = imc;
+      dadosAtualizacao.tmb = tmb;
+    }
+
+    // Enviar atualização para o servidor
+    const response = await fetch(`/api/user/atualizar/${usuario.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dadosAtualizacao)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro ao atualizar: ${response.status}`);
+    }
+
+    const resultado = await response.json();
+    console.log("Dados atualizados:", resultado);
+
+    // CORREÇÃO: Atualizar o objeto usuario com TODOS os campos retornados
+    // Se o backend retorna nome_usuario mas você usa .nome localmente
+    if (resultado.nome_usuario) {
+      usuario.nome = resultado.nome_usuario;
+      localStorage.setItem("nome_usuario", resultado.nome_usuario);
+    }
+    
+    // Atualizar peso
+    if (resultado.peso !== undefined) {
+      usuario.peso = resultado.peso;
+    }
+    
+    // Atualizar altura
+    if (resultado.altura !== undefined) {
+      usuario.altura = resultado.altura;
+    }
+    
+    // Atualizar IMC
+    if (resultado.imc !== undefined) {
+      usuario.imc = resultado.imc;
+    }
+    
+    // Atualizar TMB
+    if (resultado.tmb !== undefined) {
+      usuario.tmb = resultado.tmb;
+    }
+
+    // Atualiza interface APÓS garantir que usuario está atualizado
+    atualizarInterfaceUsuario();
+
+    // Atualiza gráfico e calorias
+    if (novoPeso) {
+      registrarPesoNovo(novoPeso);
+    }
+
+    // Recarregar a comparação de calorias com o novo TMB
+    if (totalCalorias > 0) {
+      atualizarComparacaoCalorias();
+    }
+
+    // Atualizar recomendação de ingestão calórica
+    atualizarIngestaoCalorica();
+
+    // Atualizar gráfico com o novo peso
+    atualizarGrafico();
+
+    fecharModal();
+    alert("Dados atualizados com sucesso!");
+
+  } catch (err) {
+    console.error("Erro ao atualizar dados:", err);
+    alert("Erro ao atualizar dados. Tente novamente.");
+  }
+}
+  if (confirmBtn) {
+    confirmBtn.addEventListener("click", atualizarDadosUsuario);
   }
 
   // --- CARREGAR REFEIÇÕES ---
@@ -100,34 +260,34 @@ document.addEventListener("DOMContentLoaded", async () => {
       const refeicoes = await response.json();
       console.log("Refeições carregadas:", refeicoes);
 
-      // Calcular total de calorias
       totalCalorias = calcularTotalCalorias(refeicoes);
       console.log("Total de calorias:", totalCalorias);
 
-      // Atualizar interface
       if (totalCaloriasElement) {
         totalCaloriasElement.textContent = totalCalorias.toFixed(0) + " kcal";
       }
 
-      // Comparar com TMB
-      if (comparacaoElement && usuario.tmb) {
-        const diferenca = totalCalorias - usuario.tmb;
-        
-        if (totalCalorias > usuario.tmb) {
-          comparacaoElement.textContent = `Você ultrapassou seu gasto energético diário em ${diferenca.toFixed(0)} kcal!`;
-          comparacaoElement.style.color = "red";
-        } else {
-          const falta = usuario.tmb - totalCalorias;
-          comparacaoElement.textContent = `Você está dentro do limite. Faltam ${falta.toFixed(0)} kcal para atingir seu TMB.`;
-          comparacaoElement.style.color = "green";
-        }
-      }
-
-      // Atualizar cards de refeições
+      atualizarComparacaoCalorias();
       atualizarCardsRefeicoes(refeicoes);
 
     } catch (err) {
       console.error("Erro ao carregar refeições:", err);
+    }
+  }
+
+  // --- ATUALIZAR COMPARAÇÃO DE CALORIAS ---
+  function atualizarComparacaoCalorias() {
+    if (comparacaoElement && usuario.tmb) {
+      const diferenca = totalCalorias - usuario.tmb;
+      
+      if (totalCalorias > usuario.tmb) {
+        comparacaoElement.textContent = `Você ultrapassou seu gasto energético diário em ${diferenca.toFixed(0)} kcal!`;
+        comparacaoElement.style.color = "red";
+      } else {
+        const falta = usuario.tmb - totalCalorias;
+        comparacaoElement.textContent = `Você está dentro do limite. Faltam ${falta.toFixed(0)} kcal para atingir seu TMB.`;
+        comparacaoElement.style.color = "green";
+      }
     }
   }
 
@@ -144,7 +304,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // --- ATUALIZAR CARDS DE REFEIÇÕES ---
   function atualizarCardsRefeicoes(refeicoes) {
-    // Agrupar por categoria
     const categorias = {
       "Café da manhã": { total: 0, count: 0 },
       "Almoço": { total: 0, count: 0 },
@@ -163,12 +322,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
-    // Atualizar elementos na página (adapte os IDs conforme sua página)
     Object.keys(categorias).forEach(nome => {
       const dados = categorias[nome];
       console.log(`${nome}: ${dados.total.toFixed(0)} kcal (${dados.count} refeições)`);
       
-      // Exemplo de atualização - ajuste conforme seus elementos HTML
       const elementoCaloria = document.querySelector(`[data-categoria="${nome}"] .calorias`);
       if (elementoCaloria) {
         elementoCaloria.textContent = `${dados.total.toFixed(0)} kcal`;
@@ -226,7 +383,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
           }
 
-          // Montar conteúdo do popup
           let totalRefeicao = 0;
           const conteudo = alimentos.map(item => {
             const nomeAlimento = item.nome_alimento || item.descricao || "Sem nome";
@@ -309,26 +465,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function registrarPesoNovo(novoPeso) {
     const hoje = new Date().toISOString().split("T")[0];
-    historicoPeso.push({ data: hoje, peso: novoPeso });
+    
+    // Verificar se já existe registro para hoje
+    const indiceHoje = historicoPeso.findIndex(item => item.data === hoje);
+    
+    if (indiceHoje !== -1) {
+      // Atualizar peso de hoje
+      historicoPeso[indiceHoje].peso = novoPeso;
+    } else {
+      // Adicionar novo registro
+      historicoPeso.push({ data: hoje, peso: novoPeso });
+    }
+    
     localStorage.setItem("historicoPeso", JSON.stringify(historicoPeso));
     atualizarGrafico();
   }
 
   function atualizarIngestaoCalorica() {
     if (!metaPeso || !usuario?.tmb) return;
-    const pesoAtual = parseFloat(localStorage.getItem("perfil_peso")) || usuario.peso;
+    const pesoAtual = usuario.peso;
     if (!pesoAtual) return;
-
-    if (pesoAtual > metaPeso) {
-      comparacaoElement.textContent = `Para atingir a meta, sua ingestão deve ser ABAIXO de ${usuario.tmb} kcal.`;
-      comparacaoElement.style.color = "red";
-    } else if (pesoAtual < metaPeso) {
-      comparacaoElement.textContent = `Para atingir a meta, sua ingestão deve ser ACIMA de ${usuario.tmb} kcal.`;
-      comparacaoElement.style.color = "green";
-    } else {
-      comparacaoElement.textContent = "Você atingiu sua meta!";
-      comparacaoElement.style.color = "blue";
-    }
   }
 
   let grafico;
@@ -337,43 +493,72 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!ctx) return;
     if (grafico) grafico.destroy();
 
+    const datasets = [
+      { 
+        label: "Peso Atual", 
+        data: historicoPeso.map(item => item.peso), 
+        borderColor: "rgb(75, 192, 192)",
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderWidth: 3, 
+        tension: 0.3,
+        fill: true
+      }
+    ];
+
+    if (metaPeso) {
+      datasets.push({ 
+        label: "Meta", 
+        data: historicoPeso.map(() => metaPeso), 
+        borderColor: "rgb(255, 99, 132)",
+        borderWidth: 2, 
+        borderDash: [5, 5],
+        fill: false
+      });
+    }
+
     grafico = new Chart(ctx, {
       type: "line",
       data: {
-        labels: historicoPeso.map(item => item.data),
-        datasets: [
-          { 
-            label: "Peso Atual", 
-            data: historicoPeso.map(item => item.peso), 
-            borderColor: "rgb(75, 192, 192)",
-            borderWidth: 3, 
-            tension: 0.3 
-          },
-          metaPeso ? { 
-            label: "Meta", 
-            data: historicoPeso.map(() => metaPeso), 
-            borderColor: "rgb(255, 99, 132)",
-            borderWidth: 2, 
-            borderDash: [5, 5] 
-          } : null
-        ].filter(Boolean)
+        labels: historicoPeso.map(item => {
+          const data = new Date(item.data + 'T00:00:00');
+          return data.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+        }),
+        datasets: datasets
       },
       options: {
         responsive: true,
-        maintainAspectRatio: true
+        maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.dataset.label + ': ' + context.parsed.y.toFixed(1) + ' kg';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            title: {
+              display: true,
+              text: 'Peso (kg)'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Data'
+            }
+          }
+        }
       }
     });
   }
-
-  document.getElementById("confirmBtn")?.addEventListener("click", () => {
-    const novoPeso = parseFloat(document.getElementById("input-peso")?.value);
-    if (novoPeso && novoPeso > 0) {
-      localStorage.setItem("perfil_peso", novoPeso);
-      registrarPesoNovo(novoPeso);
-      atualizarIngestaoCalorica();
-      if (pesoElement) pesoElement.textContent = novoPeso.toFixed(1);
-    }
-  });
 
   // --- LIMPAR REFEIÇÕES ANTIGAS ---
   function limparRefeicoesAntigas() {
@@ -400,5 +585,28 @@ document.addEventListener("DOMContentLoaded", async () => {
   ativarBotoesRefeicao();
   limparRefeicoesAntigas();
   atualizarGrafico();
+  atualizarIngestaoCalorica();
   console.log("Carregamento concluído!");
+});
+
+const profilePic = document.getElementById("profilePic");
+const profileInput = document.getElementById("profileInput");
+const profileImage = document.getElementById("profileImage");
+
+profilePic.addEventListener("click", () => {
+    profileInput.click();
+});
+
+profileInput.addEventListener("change", () => {
+    const file = profileInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+        profileImage.src = reader.result;
+        profileImage.style.display = "block";
+    };
+
+    reader.readAsDataURL(file);
 });

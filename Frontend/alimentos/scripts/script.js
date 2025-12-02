@@ -430,12 +430,6 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
 
-    html += `
-      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px;">
-        <button id="fechar-detalhes-btn" class="btn-secondary">Fechar</button>
-      </div>
-    `;
-
     modalBodyAlimento.innerHTML = html;
     overlayAlimento.classList.add("open");
     overlayAlimento.setAttribute("aria-hidden", "false");

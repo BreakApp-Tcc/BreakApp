@@ -59,8 +59,8 @@ router.post('/salvar-refeicao', async (req, res) => {
         }
 
         const [refeicaoResult] = await conn.query(
-            'INSERT INTO refeicoes (nome, data_hora, usuario_id) VALUES (?, ?, ?)',
-            [nome, dataHora, usuarioId]
+            'INSERT INTO refeicoes (nome, usuario_id) VALUES (?, ?, ?)',
+            [nome, usuarioId]
         );
 
         const refeicaoId = refeicaoResult.insertId;
@@ -303,7 +303,27 @@ router.post('/adicionar', async (req, res) => {
     }
 });
 
+router.delete("/limpar", async (req, res) => {
+    try {
 
+         await pool.query(`
+            DELETE ra FROM refeicao_alimentos ra
+            JOIN refeicoes r ON ra.refeicao_id = r.id
+            WHERE r.data_hora < (UTC_TIMESTAMP() - INTERVAL 24 HOUR)
+        `);
+
+        await pool.query(`
+            DELETE FROM refeicoes
+            WHERE data_hora < (UTC_TIMESTAMP() - INTERVAL 24 HOUR)
+        `);
+
+        res.status(200).json({ message: "Refeições com mais de 24h apagadas." });
+
+    } catch (err) {
+        console.error("Erro ao limpar refeições:", err);
+        res.status(500).json({ error: "Erro ao limpar refeições" });
+    }
+});
 
 
 module.exports = router;

@@ -108,7 +108,7 @@ function App() {
         backgroundColor: '#f9fafb',
         fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
       }}>
-        {/* Sidebar */}
+        {/* Sidebar - Atualizada */}
         <nav style={{
           display: 'flex',
           flexDirection: 'column',
@@ -121,7 +121,9 @@ function App() {
           borderRight: '1px solid #e5e7eb',
           boxShadow: '2px 0 5px rgba(0,0,0,0.05)'
         }}>
+          {/* Conteúdo Principal da Sidebar */}
           <div style={{ padding: '15px' }}>
+            {/* Botão de abrir/fechar */}
             <div style={{ display: 'flex', justifyContent: 'start', marginBottom: '30px' }}>
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -142,15 +144,47 @@ function App() {
               </button>
             </div>
             
+            {/* Items da Sidebar */}
             <ul style={{
               listStyle: 'none',
               display: 'flex',
               flexDirection: 'column',
-              gap: '25px',
+              gap: '10px',
               alignItems: 'center',
               padding: 0,
               margin: 0
             }}>
+              {/* Tela Inicial */}
+              <li style={{
+                cursor: 'pointer',
+                borderRadius: '8px',
+                padding: '15px',
+                width: '100%',
+                transition: 'background-color 0.2s'
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = '#f3f4f6'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>
+                <a href="http://localhost:3000/homepage" style={{
+                  textDecoration: 'none',
+                  display: 'flex',
+                  color: '#4b5563',
+                  alignItems: 'center',
+                  gap: sidebarOpen ? '13px' : '0',
+                  justifyContent: sidebarOpen ? 'flex-start' : 'center'
+                }}>
+                  <i className="fa-solid fa-house" style={{ fontSize: '18px' }}></i>
+                  <span style={{
+                    width: sidebarOpen ? 'auto' : '0',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    fontSize: '14px',
+                    transition: 'all 0.4s ease',
+                    opacity: sidebarOpen ? 1 : 0
+                  }}>Tela Inicial</span>
+                </a>
+              </li>
+              
+              {/* Dieta */}
               <li style={{
                 cursor: 'pointer',
                 borderRadius: '8px',
@@ -174,11 +208,13 @@ function App() {
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     fontSize: '14px',
-                    transition: 'all 0.4s ease'
+                    transition: 'all 0.4s ease',
+                    opacity: sidebarOpen ? 1 : 0
                   }}>Dieta</span>
                 </a>
               </li>
               
+              {/* Alimentos */}
               <li style={{
                 cursor: 'pointer',
                 borderRadius: '8px',
@@ -196,17 +232,19 @@ function App() {
                   gap: sidebarOpen ? '13px' : '0',
                   justifyContent: sidebarOpen ? 'flex-start' : 'center'
                 }}>
-                  <i className="fa-solid fa-id-card" style={{ fontSize: '18px' }}></i>
+                  <i className="fa-solid fa-apple-whole" style={{ fontSize: '18px' }}></i>
                   <span style={{
                     width: sidebarOpen ? 'auto' : '0',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     fontSize: '14px',
-                    transition: 'all 0.4s ease'
+                    transition: 'all 0.4s ease',
+                    opacity: sidebarOpen ? 1 : 0
                   }}>Alimentos</span>
                 </a>
               </li>
               
+              {/* NutrIA - Página atual */}
               <li style={{
                 cursor: 'pointer',
                 borderRadius: '8px',
@@ -217,7 +255,7 @@ function App() {
               }}
               onMouseEnter={(e) => e.target.style.backgroundColor = '#dcfce7'}
               onMouseLeave={(e) => e.target.style.backgroundColor = '#f0fdf4'}>
-                <a href="http://localhost:3000/nutria" style={{
+                <a href="http://localhost:5173" style={{
                   textDecoration: 'none',
                   display: 'flex',
                   color: '#9bca9f',
@@ -232,11 +270,13 @@ function App() {
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     fontSize: '14px',
-                    transition: 'all 0.4s ease'
+                    transition: 'all 0.4s ease',
+                    opacity: sidebarOpen ? 1 : 0
                   }}>NutrIA</span>
                 </a>
               </li>
               
+              {/* Planos */}
               <li style={{
                 cursor: 'pointer',
                 borderRadius: '8px',
@@ -254,20 +294,22 @@ function App() {
                   gap: sidebarOpen ? '13px' : '0',
                   justifyContent: sidebarOpen ? 'flex-start' : 'center'
                 }}>
-                  <i className="fa-solid fa-pen-to-square" style={{ fontSize: '18px' }}></i>
+                  <i className="fa-regular fa-pen-to-square" style={{ fontSize: '18px' }}></i>
                   <span style={{
                     width: sidebarOpen ? 'auto' : '0',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     fontSize: '14px',
-                    transition: 'all 0.4s ease'
+                    transition: 'all 0.4s ease',
+                    opacity: sidebarOpen ? 1 : 0
                   }}>Planos</span>
                 </a>
               </li>
             </ul>
           </div>
           
-          <div style={{ padding: '15px', marginTop: 'auto' }}>
+          {/* Configurações (parte inferior) */}
+          <div style={{ padding: '15px', borderTop: '1px solid #e5e7eb' }}>
             <ul style={{
               listStyle: 'none',
               display: 'flex',
@@ -299,7 +341,8 @@ function App() {
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     fontSize: '14px',
-                    transition: 'all 0.4s ease'
+                    transition: 'all 0.4s ease',
+                    opacity: sidebarOpen ? 1 : 0
                   }}>Configurações</span>
                 </a>
               </li>
