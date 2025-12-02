@@ -167,9 +167,9 @@ body:has(#sidebar.open-sidebar) .container {
   left: 38%;
   transform: translate(-50%, -50%);
   text-align: center;
-  font-weight: 600;
   pointer-events: none;
   margin-top: 20px;
+  font-weight: bold;
 }
 
 #center-kcal {
@@ -178,7 +178,7 @@ body:has(#sidebar.open-sidebar) .container {
 }
 
 #center-macros {
-  font-size: 12px;
+  font-size: 10px;
   color: var(--color-icon);
 }
 

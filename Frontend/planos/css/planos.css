@@ -48,6 +48,7 @@ main {
 body:has(#sidebar.open-sidebar) main {
   margin-left: 240px;
 }
+
 /* CONTAINER PRINCIPAL */
 .container{
     width: 1100px;
@@ -58,7 +59,10 @@ body:has(#sidebar.open-sidebar) main {
     justify-content: space-around;
     background-color: var(--color-background);
     gap: 30px;
-    margin-right: 400px;
+    margin-right: 350px;
+}
+body:has(#sidebar.open-sidebar) .container {
+  margin-left: 200px;
 }
 
 /* CARDS DE PLANOS */

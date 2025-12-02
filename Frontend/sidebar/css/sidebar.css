@@ -143,7 +143,7 @@ html.dark-mode {
   white-space: nowrap;
   overflow: hidden;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   transition: all 0.4s ease;
   opacity: 0;
 }
@@ -202,19 +202,22 @@ html.dark-mode {
   transition: margin-left 0.4s ease;
 }
 
+/* ====================================== */
+/* INDICADOR DE PÁGINA (SIDEBAR)          */
+/* ====================================== */
+
 .side-item.active {
-  background-color: #e8f5e9 !important;
+  background-color: rgba(76, 175, 80, 0.15) !important;
   position: relative;
-  border-left: 4px solid #4caf50;
 }
 
 .side-item.active a {
-  color: #2e7d32 !important;
+  color: #9bca9f !important;
   font-weight: 600;
 }
 
 .side-item.active a i {
-  color: #4caf50 !important;
+  color: #9bca9f !important;
 }
 
 .side-item.active::after {
@@ -225,26 +228,26 @@ html.dark-mode {
   transform: translateY(-50%);
   width: 4px;
   height: 60%;
-  background-color: #4caf50;
+  background-color: #9bca9f;
   border-radius: 2px 0 0 2px;
 }
 
 /* MODO ESCURO */
 html.dark-mode .side-item.active {
   background-color: rgba(76, 175, 80, 0.15) !important;
-  border-left-color: #66bb6a;
+  border-left-color: #9bca9f;
 }
 
 html.dark-mode .side-item.active a {
-  color: #81c784 !important;
+  color: #9bca9f !important;
 }
 
 html.dark-mode .side-item.active a i {
-  color: #66bb6a !important;
+  color: #9bca9f !important;
 }
 
 html.dark-mode .side-item.active::after {
-  background-color: #66bb6a;
+  background-color: #9bca9f
 }
 
 /* ANIMAÇÃO */
